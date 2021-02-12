@@ -139,13 +139,11 @@ p, blockquote, ul, ol, dl, table{
 li>ol, li>ul {
     margin: 0 0;
 }
-hr {
-    /* height: 2px; */
-    height: 4px;                                        /* Cuipy_Changed */
+hr {                                        /* 水平分割线 */
+    height: 4px;                                        
     padding: 0;
     margin: 16px 0;
-    /* background-color: #e7e7e7; */
-    background-color: var(--hr-color);     /* Cuipy_Changed */
+    background-color: var(--hr-color);      /* Cuipy_Changed */
     border: 0 none;
     overflow: hidden;
     box-sizing: content-box;
@@ -154,8 +152,12 @@ hr {
 li p.first {
     display: inline-block;
 }
-ul, ol {
-    padding-left: 30px;
+ul {
+    padding-left: 20px;
+}
+ol {
+    padding-left: 23px;
+    list-style-type: upper-roman;
 }
 ul:first-child, ol:first-child {
     margin-top: 0;
@@ -174,10 +176,16 @@ blockquote {
 blockquote blockquote {   
     padding-right: 0;                               /* 多嵌套时, 右侧不再继续缩小 */
 }
-p + blockquote {                                    /* 紧邻文本时, 上边界减小 */
+p + blockquote {                                    /* blockquote 紧邻文本时, 相应边界减小 */
     margin-top: -1ex;
-    margin-bottom: 0;
+    margin-bottom: 0ex;
 }
+ol p + blockquote,
+ul p + blockquote {                                 /* 接上条, 在列表中有一些问题? 没搞懂原理, 先这么暂时修复着吧... */
+    margin-top: -0.5ex;
+    margin-bottom: 1ex;
+} 
+
 
 
 table {
