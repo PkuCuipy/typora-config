@@ -1,0 +1,450 @@
+
+/*
+    基于 Github 风格进行修改(勘误?)
+    所有修改的部分会用 Cuipy_Changed 或者 Cuipy_Added 进行标注
+
+    Typora 的 Github 风格默认情况:
+    由*包围     <em></em>               斜体
+    由**包围    <strong></strong>       粗体
+    由==包围    <mark></mark>           背景色修改为黄色
+    由`包围     <code></code>           由淡灰色圆角矩形包围
+    blockquote: 引用块
+
+    注意不能修改字间距(spacing), 因为一旦修改, 英文就会变得非常难看!
+    而且考虑到 CSS 的选择器并没有提供方法来区分中文和英文, 所以无法分别设置!
+
+    [github.com]的颜色配置略微偏蓝一些(b分量略大一丢丢), 而Typora的[github主题]似乎是纯纯的灰色(r==g==b)
+
+*/
+
+
+
+:root {
+    /* 这里可以定义变量 */
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+    /* Cuipy Added */
+    --github-com-code-bg-color: #f6f8fa;        /* 大代码块的背景颜色 */
+    --github-com-hr-color: #e2e4e8;            /* 水平分割线(Horizontal Rule)的颜色 */     
+    --github-com-text-color: #25292e;
+    --github-com-blockquote-text-color: #6c737c;
+    --github-com-code-font: "Menlo";
+    --cuipy-ui-bg-color: "f6f8fa";
+    --cuipy-highlight-color: #ffe3c3;
+    --cuipy-border-radius: 5px;
+
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Helvetica Neue", "PingFang SC";                   /* Cuipy_Changed */
+    /* color: #333333; */
+    color: var(--github-com-text-color);                                /* Cuipy_Changed */
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;    
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+
+
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+
+
+h1 tt, h1 code,
+h2 tt, h2 code,
+h3 tt, h3 code,
+h4 tt, h4 code,
+h5 tt, h5 code,
+h6 tt, h6 code {
+    font-size: inherit;
+}
+
+
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3em;              /* Cuipy_Added imitating [github.com] */
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3em;              /* Cuipy_Added imitating [github.com] */
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+    font-size: 1em;
+    color: #777;
+}
+
+
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    /* height: 2px; */
+    height: 4px;                                        /* Cuipy_Changed */
+    padding: 0;
+    margin: 16px 0;
+    /* background-color: #e7e7e7; */
+    background-color: var(--github-com-hr-color);     /* Cuipy_Changed */
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    /* color: #777777; */
+    color: var(--github-com-blockquote-text-color);         /* Cuipy_Changed */
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+    /* border-radius: 3px; */
+    border-radius: var(--cuipy-border-radius);                  /* Cuipy_Changed */
+    font-family: var(--github-com-code-font), "Courier";        /* Cuipy_Added */
+}
+
+code {
+    background-color: #f3f4f4;
+    /* padding: 0 2px 0 2px; */
+    padding: 2px 5px 2px 5px;           /* Cuipy_Changed */    /* 上 右 下 左 */
+    border-style: hidden;               /* Cuipy_Added */
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {                                                    /* 大代码段 */
+	/* background-color: #f8f8f8; */
+    background-color: var(--github-com-code-bg-color);          /* Cuipy_Changed */
+    font-family: var(--github-com-code-font), "Courier";        /* Cuipy_Added */
+    border-style: hidden;                                       /* Cuipy_Added*/
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    /* border-radius: 3px; */
+    border-radius: var(--cuipy-border-radius);                  /* Cuipy_Changed */
+    color: #777777;
+    color: red;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    /* background: #fafafa; */
+    background-color: var(--cuipy-ui-bg-color);         /* Cuipy_Changed */
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    border: 1px solid #ddd;                              /* Cuipy Changed */
+    /* border-radius: 3px; */
+    border-radius: var(--cuipy-border-radius);                  /* Cuipy_Changed */
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    /* background-color: #FAFAFA; */
+    background-color: var(--cuipy-ui-bg-color);         /* Cuipy_Changed */
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    /* background-color: var(--side-bar-bg-color); */
+    background-color: var(--cuipy-ui-bg-color);         /* Cuipy_Changed */
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    /* background-color: #fafafa; */
+    background-color: var(--cuipy-ui-bg-color);          /* Cuipy_Changed */
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+
+
+
+
+
+
+
+
+
+/* =========== Cuipy_Added ============ */
+/* 修改高亮的颜色, 以及柔和的边框, 类似小代码块<code> */
+mark {
+    background-color: var(--cuipy-highlight-color);
+    border-radius: var(--cuipy-border-radius); 
+}
+/* 修改下划线的实现方式(默认下划线->下边框) 提供更多定制空间 */
+u {
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--github-com-text-color);
+    padding-bottom: 0.5px;
+}
+/* 修改右侧对齐, 防止最右侧的斜体字"插进"正体字里 */
+em{
+    margin-right: 2px;
+}
+/* 
+svg {
+    float: left;
+} */
+
+
+/* =========== Cuipy_Added ============ */
+/* Latin Modern Math(或者baskerville) */
+/* 由*包围时, 不再设置斜体, 并修改字体为宋体 */
+/* em{
+    font-style: normal;
+    font-family: 'Latin Modern Math', 'Baskerville', 'SimSun', '宋体';
+} */
+/* Cuipy_Added */
+/* 由==包围时, 不再设置高亮, 并修改字体为楷体 */
+/* mark {
+    vertical-align: 4%;
+    background-color:inherit;
+    font-family: 'Latin Modern Math', 'Baskerville', 'KaiTi SC', '楷体';
+} */
+/* Cuipy_Added */
+/* 由 <u></u> 包围时, 不再设置下划线, 并修改字体为仿宋 */
+/* u {
+    text-decoration: none;
+    font-family: 'Latin Modern Math', 'Baskerville', 'STFangsong', '华文仿宋';
+} */
+
+
