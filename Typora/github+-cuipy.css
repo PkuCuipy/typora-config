@@ -27,10 +27,10 @@
     --bigcode-bg-color: #f6f8fa;        /* 大代码块的背景颜色 */
     --smallcode-bg-color: #e7e9e980;    /* 小代码块的背景颜色 */
     --quoted-smallcode-bg-color: #d2d6d680;    /* 引用块中小代码块的背景颜色 */
-    --quoted-bg-color: #dfe2e550;       /* 背景颜色, 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */       
+    --quoted-bg-color: #dfe2e541;       /* 背景颜色, 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */         
     --hr-color: #e2e4e8;                /* 水平分割线(Horizontal Rule)的颜色 */     
-    --text-color: #25292e;              /* 正常文本的颜色 */
-    --quoted-text-color: #25292ee0;     /* 被引用文本的颜色 */
+    --text-color: rgb(37, 41, 46);              /* 正常文本的颜色 */
+    --quoted-text-color: rgb(37, 41, 46);     /* 被引用文本的颜色 */
     --code-font: "Menlo";                 /* 代码的字体 */
     --user-interface-color: "f6f8fa";
     --highlight-color: #ffe3c3;
@@ -165,14 +165,20 @@ ul:last-child, ol:last-child {
 }
 
 blockquote {
-    /* border-left: 4px solid #dfe2e5;*/          /* 左边竖线  */
-    padding: 8px 10px 6px 10px;                   /* 上右下左 */
-    background-color: var(--quoted-bg-color);    /* 背景颜色, 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */           
-    color: var(--quoted-text-color);          /* 文字颜色 */                                 
-    border-radius: var(--cuipy-border-radius);    /* 边框半径 */      
-} blockquote blockquote {   
-    padding-right: 0;                             /* 多嵌套时, 右侧不再继续缩小 */
+    /* border-left: 4px solid #dfe2e5;*/            /* 左边竖线  */
+    padding: 8px 10px 6px 14px;                     /* 上右下左 */
+    background-color: var(--quoted-bg-color);       /* 背景颜色, 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */           
+    color: var(--quoted-text-color);                /* 文字颜色 */                                 
+    border-radius: var(--cuipy-border-radius);      /* 边框半径 */      
+} 
+blockquote blockquote {   
+    padding-right: 0;                               /* 多嵌套时, 右侧不再继续缩小 */
 }
+p + blockquote {                                    /* 紧邻文本时, 上边界减小 */
+    margin-top: -1ex;
+    margin-bottom: 0;
+}
+
 
 table {
     padding: 0;
