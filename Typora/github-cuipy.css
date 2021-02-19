@@ -189,9 +189,10 @@ table tr {
     margin: 0;
     padding: 0;
 }
-table tr:nth-child(2n),
-thead {
-    background-color: #f8f8f8;
+table tr:nth-child(2n), thead {
+    /* background-color: #f8f8f8; */
+    background-color: var(--github-com-code-bg-color);      /* Cuipy_Changed */
+    width: 0;                                               /* Cuipy_Added */
 }
 table tr th {
     font-weight: bold;
@@ -420,10 +421,11 @@ u {
 em{
     margin-right: 2px;
 }
-/* 
-svg {
-    float: left;
-} */
+/* 取消表格占用整个宽度 */
+table {
+    width: 0;
+}
+
 
 
 /* =========== Cuipy_Added ============ */
