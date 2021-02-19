@@ -15,6 +15,12 @@
 
     [github.com]的颜色配置略微偏蓝一些(b分量略大一丢丢), 而Typora的[github主题]似乎是纯纯的灰色(r==g==b)
 
+
+    一个坑: Typora 的元素审查页面 和导出的 HTML 并不完全一致.
+    比如在 Typora 中, 列表中的 span 是被一个 p 标签包围的, 然而在html(浏览器)中就没有这个p标签.
+    最坑的地方在于, Typora 给这个 p 标签指定了 css 样式, 具体而言是一个 margin-bottom:0.5rem
+    这就导致导出的 html 的列表间距非常小.
+    我的解决方案: 
 */
 
 
@@ -30,7 +36,7 @@
     --quoted-bg-color: #dfe2e541;       /* 背景颜色, 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */         
     --hr-color: #e2e4e8;                /* 水平分割线(Horizontal Rule)的颜色 */     
     --text-color: rgb(37, 41, 46);              /* 正常文本的颜色 */
-    --quoted-text-color: rgb(37, 41, 46);     /* 被引用文本的颜色 */
+    --quoted-text-color: rgba(37, 41, 46, 0.808);     /* 被引用文本的颜色 */
     --code-font: "Menlo";                 /* 代码的字体 */
     --user-interface-color: "f6f8fa";
     --highlight-color: #ffe3c3;
@@ -74,6 +80,7 @@ body {
 
 a {
     color: #4183C4;
+    text-decoration: none;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -105,24 +112,25 @@ h6 tt, h6 code {
 }
 
 
+/* 6级标题的格式 */
 h1 {
-    font-size: 2.25em;
+    font-size: 2em;
     line-height: 1.2;
     border-bottom: 1px solid #eee;
     padding-bottom: 0.3em;              /* Cuipy_Added imitating [github.com] */
 }
 h2 {
-    font-size: 1.75em;
+    font-size: 1.5em;
     line-height: 1.225;
     border-bottom: 1px solid #eee;
     padding-bottom: 0.3em;              /* Cuipy_Added imitating [github.com] */
 }
 h3 {
-    font-size: 1.5em;
+    font-size: 1.25em;
     line-height: 1.43;
 }
 h4 {
-    font-size: 1.25em;
+    font-size: 1em;
 }
 h5 {
     font-size: 1em;
@@ -159,6 +167,9 @@ ol {
     padding-left: 23px;
     list-style-type: upper-roman;
 }
+ol ol {
+    list-style-type: lower-roman;
+}
 ul:first-child, ol:first-child {
     margin-top: 0;
 }
@@ -176,15 +187,6 @@ blockquote {
 blockquote blockquote {   
     padding-right: 0;                               /* 多嵌套时, 右侧不再继续缩小 */
 }
-p + blockquote {                                    /* blockquote 紧邻文本时, 相应边界减小 */
-    margin-top: -1ex;
-    margin-bottom: 0ex;
-}
-ol p + blockquote,
-ul p + blockquote {                                 /* 接上条, 在列表中有一些问题? 没搞懂原理, 先这么暂时修复着吧... */
-    margin-top: -0.5ex;
-    margin-bottom: 1ex;
-} 
 
 
 
@@ -197,9 +199,9 @@ table tr {
     margin: 0;
     padding: 0;
 }
-table tr:nth-child(2n),
-thead {
-    background-color: #f8f8f8;
+table tr:nth-child(2n), thead {
+    /* background-color: #f8f8f8; */
+    background-color: var(--bigcode-bg-color);
 }
 table tr th {
     font-weight: bold;
@@ -281,10 +283,10 @@ blockquote code {
     }
 }
 
-.md-fences {                                                    /* 大代码段 */
+.md-fences {                                                    /* 大代码块 */
 	/* background-color: #f8f8f8; */
-    background-color: var(--bigcode-bg-color);          /* Cuipy_Changed */
-    font-family: var(--code-font), "Courier";        /* Cuipy_Added */
+    background-color: var(--bigcode-bg-color);                  /* Cuipy_Changed */
+    font-family: var(--code-font), "Courier";                   /* Cuipy_Added */
     border-style: hidden;                                       /* Cuipy_Added*/
 }
 #write pre.md-meta-block {
@@ -430,4 +432,44 @@ img {
     border-radius: var(--cuipy-border-radius);
     border: 2px solid  rgba(0,0,0,0.1);
     padding: 0 0 0 0;
+}
+
+
+/* blockquote 紧邻文本时, 相应边界减小 */
+p + blockquote {                                    
+    margin-top: -1ex;
+    margin-bottom: 0ex;
+}
+/* 接上条, 在列表中有一些问题? 没搞懂原理, 先这么暂时修复着吧... */
+/*
+附: 复现错误的代码: 
+- 123
+    
+    > 234
+    
+    - 456
+*/
+ol p + blockquote,
+ul p + blockquote {                                
+    margin-top: -0.5ex;
+    margin-bottom: 1ex; 
+} 
+
+
+/* 大代码段紧邻文本时, 相应边界减小 */
+p + .md-fences {                                    
+    margin-top: -1ex;
+    margin-bottom: 0ex;
+}
+/* 接上条, 在列表中有一些问题? 没搞懂原理, 先这么暂时修复着吧... */
+ol p + .md-fences,
+ul p + .md-fences {                                 
+    margin-top: -0.5ex;
+    margin-bottom: 1ex;
+}
+
+
+/* 取消表格占用整个宽度 */
+table {
+    width: 0;
 }
