@@ -151,10 +151,11 @@ hr {                                        /* 水平分割线 */
     height: 4px;                                        
     padding: 0;
     margin: 16px 0;
-    background-color: var(--hr-color);      /* Cuipy_Changed */
+    background-color: var(--hr-color);
     border: 0 none;
     overflow: hidden;
-    box-sizing: content-box;
+    box-sizing: content-box;    
+    border-radius:1px;
 }
 
 li p.first {
@@ -473,3 +474,36 @@ ul p + .md-fences {
 table {
     width: 0;
 }
+
+
+/* 标题计数器 */
+body {
+    counter-reset: cnt_h1 0;
+}
+h1 {
+    counter-reset: cnt_h2;
+    counter-increment: cnt_h1;
+} 
+h2 {
+    counter-reset: cnt_h3;
+    counter-increment: cnt_h2;
+} 
+h3 {
+    counter-increment: cnt_h3;
+}
+h1:before {
+    content: counter(cnt_h1) ". ";
+    font-weight: normal;
+    white-space: pre-wrap;
+}
+h2:before {
+    content: counter(cnt_h1) "." counter(cnt_h2) ". ";
+    font-weight: normal;
+    white-space: pre-wrap;
+}
+h3:before {
+    content: counter(cnt_h1) "." counter(cnt_h2) "." counter(cnt_h3) ". ";
+    font-weight: normal;
+    white-space: pre-wrap;
+}
+
