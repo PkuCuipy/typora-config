@@ -20,7 +20,11 @@
     比如在 Typora 中, 列表中的 span 是被一个 p 标签包围的, 然而在html(浏览器)中就没有这个p标签.
     最坑的地方在于, Typora 给这个 p 标签指定了 css 样式, 具体而言是一个 margin-bottom:0.5rem
     这就导致导出的 html 的列表间距非常小.
-    我的解决方案: 
+    我的解决方案: 懒得解决.
+
+    一个技巧: 本色加深一倍, 透明度设为50%. 和荧光笔, 引用块 配合更好.
+    比如对于纯白色的背景, rgb(240,240,240) 和 rgba(225,225,225,50) 看起来是一样的
+
 */
 
 
@@ -31,12 +35,12 @@
     --side-bar-bg-color: #fafafa;
     /* Cuipy Added */
     --bigcode-bg-color: #f6f8fa;            /* 大代码块的背景颜色 */
-    --smallcode-bg-color: #e7e9e980;        /* 小代码块的背景颜色 */
-    --quoted-smallcode-bg-color: #d2d6d680; /* 引用块中小代码块的背景颜色 */
-    --quoted-bg-color: #dfe2e541;           /* 背景颜色, 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */         
+    --smallcode-bg-color: rgb(248,242,244); /* 小代码块的背景颜色 */
+    --smallcode-text-color: rgb(183,54,80); /* 小代码块的文本颜色 */
+    --blockquote-bg-color: #dfe2e541;       /* 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */         
     --hr-color: #e2e4e8;                    /* 水平分割线(Horizontal Rule)的颜色 */     
     --text-color: rgb(37, 41, 46);          /* 正常文本的颜色 */
-    --quoted-text-color: rgba(37, 41, 46, 0.808);     /* 被引用文本的颜色 */
+    --blockquote-text-color: rgba(37, 41, 46, 0.808);     /* 被引用文本的颜色 */
     --bigcode-font: "Menlo";                  /* 大代码的字体 */
     --smallcode-font: "Menlo";                /* 小代码的字体 */
     --user-interface-color: #f6f8fa;
@@ -178,16 +182,6 @@ ul:last-child, ol:last-child {
     margin-bottom: 0;
 }
 
-blockquote {
-    /* border-left: 4px solid #dfe2e5;*/            /* 左边竖线  */
-    padding: 8px 10px 6px 14px;                     /* 上右下左 */
-    background-color: var(--quoted-bg-color);       /* 背景颜色, 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */           
-    color: var(--quoted-text-color);                /* 文字颜色 */                                 
-    border-radius: var(--cuipy-border-radius);      /* 边框半径 */      
-} 
-blockquote blockquote {   
-    padding-right: 0;                               /* 多嵌套时, 右侧不再继续缩小 */
-}
 
 
 
@@ -243,17 +237,15 @@ tt {
     padding: 0;
     padding: 2px 4px 0px 4px;
     font-size: 0.9em;
-    /* border-radius: 3px; */
-    border-radius: var(--cuipy-border-radius);                  /* Cuipy_Changed */
+    border-radius: var(--cuipy-border-radius);
 }
 
-code {                                                  /* `小代码块`  */
-    padding: 2px 5px 2px 5px;                           /* 上 右 下 左 */
-    background-color: var(--smallcode-bg-color);        /* 改成一种"等价"写法, 即本色加深一倍, 透明度设为50%. 和荧光笔, 引用块 配合更好*/
+code {                                                  /* 小代码块  */
+    padding: 2px 5px 2px 5px;                           /* 上右下左 */
+    background-color: var(--smallcode-bg-color);        
+    color: var(--smallcode-text-color);
     font-family: var(--smallcode-font);
-}
-blockquote code {
-    background-color: var(--quoted-smallcode-bg-color);
+    border-style: hidden;
 }
 
 .md-fences {
@@ -431,17 +423,10 @@ img {
     padding: 0 0 0 0;
 }
 
-
 /* 换行文字间距减小 */
 p {
     margin: 0.35em 0;
 }
-
-/* blockquote 紧邻文本时, 相应边界减小 */
-p + blockquote {                                    
-    margin-top: -0.45ex;
-}
-
 
 /* 取消表格占用整个宽度, 但具有最小宽度(通过对 th td 设置) */
 table {
@@ -449,6 +434,7 @@ table {
 }
 th, td {
     width: 5em;
+    white-space: nowrap;    
 }
 
 
@@ -473,8 +459,7 @@ h3:before {
     font-weight: normal;
 }
 
-
-/* 侧边栏大纲也要计数器标号 */
+/* 侧边栏大纲的计数器标号 */
 .sidebar-content {counter-reset: sb_cnt_h1;}
 .outline-h1 {counter-reset: sb_cnt_h2;}
 .outline-h2 {counter-reset: sb_cnt_h3;}
@@ -519,3 +504,28 @@ table tr:first-child th:first-child {border-top-left-radius: var(--cuipy-border-
 table tr:first-child th:last-child {border-top-right-radius: var(--cuipy-border-radius);}
 table tr:last-child td:last-child {border-bottom-right-radius: var(--cuipy-border-radius);}
 table tr:last-child td:first-child {border-bottom-left-radius: var(--cuipy-border-radius);}
+
+
+
+/*
+    blockquote 大引用块
+*/
+blockquote {
+    border-left: 7px solid #ddd;
+    padding: 8px 10px 6px 14px;  
+    background-color: var(--blockquote-bg-color);
+    color: var(--blockquote-text-color);  
+    border-top-right-radius: var(--cuipy-border-radius);  
+    border-bottom-right-radius: var(--cuipy-border-radius);  
+    margin-left: 1px;
+}
+
+blockquote blockquote {   
+    padding-right: 0;                               /* 多嵌套时, 右侧不再继续缩小 */
+}
+
+
+/* blockquote 紧邻文本时, 相应边界减小 */
+p + blockquote {                                    
+    margin-top: -0.45ex;
+}
