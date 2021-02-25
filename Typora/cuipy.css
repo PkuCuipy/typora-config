@@ -4,12 +4,21 @@
     不吐槽自己了.
     这个主题的模板仍然是 github.css , 
     并且参考注释更为清晰的 vintage.css
-    这里说一下这次以自己昵称命名的主题要做什么, 
-    包括之前改写 github 主题时自己比较满意的一些点.
+    这里说一下这次以自己命名的主题要做什么, 
+    包括一些笔记.
     
-
-    第一点是列表的缩进, 在 Github 主题下, 
-    无序/有序列表相比于正常的文字会靠右, 我改掉了这个.
+    1. 列表的缩进, 在 Github 主题下, 
+        无序/有序列表相比于正常的文字会靠右, 我改掉了这个.
+    2. 原来的自动折行和软换行的间距为0, 这真的太难看了.
+    3. 看到一个博客的格式很好, 我就基本上抄过来了. 
+        在那个博客中, 代码块和左侧的标号是用一个 table 实现的,
+        相比于 Typora 这个及其复杂的结构真是不知道高到哪里去了x
+        总之为了实现类似的效果, 没少折腾, 最后的结果也蛮丑陋的.
+    4. 标题太大太丑, 减小了大小, 同时增加了css计数器实现自动标号.
+    5. 文本紧接着的 blockquote 很大程度上是对这个文本进行"注释", 
+        针对这种情形缩小间距. 否则有很强的的分离感.
+    6. 改用 Google 的 Noto 字体, 而非苹果的 PingFang 字体. 纯折腾.
+    7. 现在(2021/2/25)的一切都很令人满意了, 少折腾点吧, 还有7天选课截止, 还有10天就开学了.
 
 
 */
@@ -28,7 +37,8 @@
     --hr-color: #e2e4e8;                    /* 水平分割线(Horizontal Rule)的颜色 */     
     --blockquote-text-color: #666666;       /* 被引用文本的颜色 */
     --code-font: "Menlo";                     /* 代码字体 */
-    --text-font: "Noto Sans CJK SC";
+    --google-font: "Noto Sans CJK SC";
+    --apple-font: "Helvetica Neue", "PingFang SC";
     --ui-bg-color: #fafafa;
     --highlight-color: #ffe3c3;
     --big-border-radius: 5px;
@@ -40,20 +50,24 @@
 
 /******************************* 这里定义一些全局信息 ******************************/
 
+html {
+    font-size: 16px;
+}
 html, body, #write {
     background: white;
-    font-family: var(--text-font), "Helvetica Neue", "PingFang SC"; 
-    font-size: 17px;
+    font-family: var(--google-font), var(--apple-font);
     font-weight: normal;
     color: var(--text-color);   
     line-height: 1.6;
-    max-width: 860px;
     margin: auto;
   	padding: 30px;
     padding-bottom: 100px;
 }
 
 /* 当屏幕足够大时, 扩展 max-width 以更好地适应屏幕 */
+#write {
+    max-width: 860px;
+}
 @media only screen and (min-width: 1400px) {    
 	#write {
 		max-width: 1024px;
@@ -67,15 +81,12 @@ html, body, #write {
 
 /******************************* 这里定义水平线的样式 ******************************/
 
-hr {   
-    height: 4px;                                        
-    padding: 0;
-    margin: 16px 0;
-    background-color: var(--hr-color);
-    border: 0 none;
-    overflow: hidden;
-    box-sizing: content-box;    
-    border-radius: 1px;
+hr {
+    /* margin: 3em auto; */
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    border-top: 1px solid var(--hr-color);
 }
 
 /******************************* 这里定义链接的样式 *******************************/
@@ -98,17 +109,17 @@ a:hover {
     counter-reset: h1toc;
 }
 .md-toc-h1 {
-    font-size: 1.1em;
+    font-size: 1.1rem;
     margin-left: 0;
     counter-reset: h2toc;
 }
 .md-toc-h2 {
-    font-size: 1.05em;
+    font-size: 1rem;
     margin-left: 2rem;
     counter-reset: h3toc;
 }
 .md-toc-h3 {
-    font-size: 1em;
+    font-size: 0.9rem;
     margin-left: 3rem;
     counter-reset: h4toc;
 }
@@ -237,27 +248,25 @@ code {
 
 h1,h2,h3,h4,h5,h6 {
     position: relative;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;    
     font-weight: 500;
     cursor: text;
 }
 h1 {
     text-align: center;
-    font-weight: 500;
-    font-size: 1.6em;
-    padding-bottom: 0.3em;  
+    font-size: 1.6rem;
+    padding-bottom: 0.3rem;  
 }
 h2 {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     color: rgb(53, 94, 138);
 }
 h3 {
-    font-size: 1.1em;
-    /* color: rgb(152, 51, 48); */
+    font-size: 1.1rem;
 }
 h4, h5, h6 {
-    font-size: 1em;
+    font-size: 1rem;
     color: red;
     text-decoration: line-through;
 }
@@ -311,6 +320,10 @@ ul:first-child, ol:first-child {
 ul:last-child, ol:last-child {
     margin-bottom: 0;
 }
+/* 列表中的段落不设置边界了, 因为间距太大太丑. */
+li p {
+    margin: 0 0;
+}
 
 /******************************* 这里定义段落的样式 ******************************/
 
@@ -345,7 +358,7 @@ blockquote blockquote {
 }
 /* blockquote 紧邻文本时, 相应边界减小 */
 p + blockquote {                                    
-    margin-top: -4px;
+    margin-top: 0.25rem;
 }
 
 
@@ -418,32 +431,6 @@ table tr:last-child td:first-child {border-bottom-left-radius: var(--big-border-
 
 
 
-/*************************** 这里定义打印或者导出PDF的样式 **************************/
-
-@media print {
-    html {
-        font-size: 13px;
-    }
-    table,
-    pre {
-        page-break-inside: avoid;
-    }
-    pre {
-        word-wrap: break-word;
-    }
-
-    @page {
-        margin-top: 20mm;
-        margin-bottom: 20mm;
-        margin-left: 0mm;
-        margin-right: 0mm;
-    }
-
-    #write {
-        max-width: 100%;
-    }
-}
-
 /*************************** 这里修改一些杂项的样式 **************************/
 
 /* 修改高亮的颜色, 以及柔和的边框, 类似小代码块<code> */
@@ -461,6 +448,26 @@ u {
 em{
     margin-right: 2px;
 }
+
+/*************************** 这里定义打印或者导出PDF的样式 **************************/
+
+@media print {
+    html {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .typora-export #write {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    table, pre {
+        page-break-inside: avoid;   
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
 
 /*************************** 下面的是从 github.css 直接复制过来的, 不太清楚具体做了什么 **************************/
 
@@ -576,6 +583,3 @@ header, .context-menu, .megamenu-content, footer{
     color: white;
     background: #999;
 }
-
-
-
