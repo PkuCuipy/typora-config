@@ -252,10 +252,10 @@ code {
 
 /******************************* 这里定义标题的样式 ******************************/
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
     position: relative;
-    margin-top: 1rem;
-    margin-bottom: 1rem;    
+    margin-top: 1.5rem;
+    margin-bottom: 0rem;    
     font-weight: 500;
     cursor: text;
 }
@@ -276,6 +276,19 @@ h4, h5, h6 {
     color: red;
     text-decoration: line-through;
 }
+
+/* 微调 */
+blockquote + h3, 
+.md-fences + h3,
+.mathjax-block + h3 {
+    margin-top: 2rem;
+}
+blockquote + h2, 
+.md-fences + h2,
+.mathjax-block + h2 {
+    margin-top: 2rem;
+}
+
 
 /* 标题计数器 */
 body {counter-reset: cnt_h1;}
@@ -455,6 +468,15 @@ em{
     margin-right: 2px;
 }
 
+/* 内联公式有点偏下 */
+.inline-math-svg {
+    vertical-align: 3%;
+}
+/* emoji 有点偏下 */
+.md-emoji-span {
+    vertical-align: 7%;
+}
+
 /*************************** 这里定义打印或者导出PDF的样式 **************************/
 
 @media print {
@@ -467,7 +489,7 @@ em{
         margin: 0 !important;
     }
     table, pre {
-        page-break-inside: avoid;   
+        page-break-inside: auto !important;   
     }
     pre {
         word-wrap: break-word;
