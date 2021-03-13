@@ -63,7 +63,7 @@ html, body, #write {
     font-family: var(--google-font), var(--apple-font);
     font-weight: normal;
     color: var(--text-color);   
-    line-height: 1.6;
+    line-height: 1.6;   /* General line-height. Specified in specific elements */
     margin: auto;
   	padding: 30px;
     padding-bottom: 100px;
@@ -119,14 +119,18 @@ a:hover {
     counter-reset: h2toc;
 }
 .md-toc-h2 {
-    font-size: 1rem;
+    font-size: 1.05rem;
     margin-left: 2rem;
     counter-reset: h3toc;
 }
 .md-toc-h3 {
-    font-size: 0.9rem;
+    font-size: 1.0rem;
     margin-left: 3rem;
     counter-reset: h4toc;
+}
+.md-toc-h4 {
+    font-size: 0.95rem;
+    margin-left: 6rem;
 }
 .md-toc-h1:before {
     color: #285e8e;
@@ -146,12 +150,23 @@ a:hover {
     counter-increment: h3toc;
     content: counter(h1toc) "."counter(h2toc) "."counter(h3toc) "  "
 }
+.md-toc-h4:before {
+    color: #285e8e;
+    white-space: pre-wrap;
+    content: "[ ";
+}
+.md-toc-h4:after {
+    color: #285e8e;
+    white-space: pre-wrap;
+    content: " ]";
+}
 
 .md-toc-h1 .md-toc-inner,
 .md-toc-h2 .md-toc-inner,
-.md-toc-h3 .md-toc-inner {
+.md-toc-h3 .md-toc-inner,
+.md-toc-h4 .md-toc-inner {
     margin-left: 0;
-    border-style: none;
+    border-style: none; 
     font-weight: normal;
 }
 .md-toc-h1 .md-toc-inner:hover,
@@ -271,23 +286,42 @@ h2 {
 h3 {
     font-size: 1.1rem;
 }
-h4, h5, h6 {
+h4 {
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+h4:before{
+    content: "[ ";
+    color:rgb(53, 94, 138)
+}
+h4::after{
+    content: " ]";
+    color:rgb(53, 94, 138)
+}
+h5, h6 {
     font-size: 1rem;
     color: red;
     text-decoration: line-through;
 }
 
-/* 微调 */
-blockquote + h3, 
-.md-fences + h3,
-.mathjax-block + h3 {
-    margin-top: 2rem;
+/* 微调, 关于 h2 和 h3 之间的间距 */
+h2 + h3 {
+    margin-top: 1rem;
 }
+
+
+/* 微调, 关于标题和功能块的间距 */
 blockquote + h2, 
-.md-fences + h2,
+.md-fences + h2, 
 .mathjax-block + h2 {
     margin-top: 2rem;
 }
+blockquote + h3, 
+.md-fences + h3, 
+.mathjax-block + h3 {
+    margin-top: 2rem;
+}
+
 
 
 /* 标题计数器 */
@@ -328,11 +362,11 @@ ul {
 }
 ol {
     padding-left: 23px;
-    list-style-type: upper-roman;
+    /* list-style-type: upper-roman; */
 }
-ol ol {
+/* ol ol {
     list-style-type: lower-roman;
-}
+} */
 ul:first-child, ol:first-child {
     margin-top: 0;
 }
@@ -348,8 +382,16 @@ li p {
 
 /* 折行和软换行的行间距增大 */
 p {
-    line-height: 2;
+    line-height: 2.0;
 }
+/* 对于导出的 html 或 pdf 而言, 某些位置的 p 被优化掉了, 取而代之的是 span */
+span {
+    line-height: 2.0;
+}
+.md-fences span {
+    line-height: 1.6;
+}
+
 
 /******************************* 这里定义图片的样式 ******************************/
 
@@ -379,6 +421,11 @@ blockquote blockquote {
 p + blockquote {                                    
     margin-top: 0.25rem;
 }
+/* 引用块内的最后一个大公式块的下边距增大 */
+blockquote .mathjax-block:last-child {
+    margin-bottom: 1.111rem;
+}
+
 
 
 /******************************* 这里定义表格的样式 ******************************/
@@ -464,17 +511,35 @@ u {
     padding-bottom: 0.5px;
 }
 /* <斜体>修改右侧对齐量, 防止最右侧的斜体字"插进"正体字里 */
-em{
+em {
     margin-right: 2px;
+}
+/* 删除线的微调 */
+del {
+    /* text-decoration-color: #285e8e; */
+    text-decoration-thickness: 2px;
+    color: var(--blockquote-text-color);
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
 }
 
 /* 内联公式有点偏下 */
-.inline-math-svg {
+/* .inline-math-svg {
     vertical-align: 3%;
-}
+} */
 /* emoji 有点偏下 */
 .md-emoji-span {
     vertical-align: 7%;
+}
+
+/* 侧边栏字号也根据 html 字号变化 */
+#typora-sidebar {
+    font-size: 0.89rem !important;
+}
+
+/* 侧边栏行高有点高 */
+#typora-sidebar span {
+    line-height: 1.5;
 }
 
 /*************************** 这里定义打印或者导出PDF的样式 **************************/
@@ -484,7 +549,7 @@ em{
         padding: 0 !important;
         margin: 0 !important;
     }
-    .typora-export #write {
+    #write {
         padding: 0 !important;
         margin: 0 !important;
     }
@@ -494,6 +559,10 @@ em{
     pre {
         word-wrap: break-word;
     }
+    /* .typora-export p {
+        font-size: 13px;
+    } */
+
 }
 
 
