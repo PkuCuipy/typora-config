@@ -35,9 +35,10 @@
     --side-bar-bg-color: #fafafa;
     /* 这些是这个文件自己用到的变量 */
     --text-color: #555555;                  /* 正常文本的颜色 */
+    --theme-blue: rgb(53, 94, 138);         /* 主题蓝色 */
     --bigcode-bg-color: #f7f7f7;            /* 大代码块的背景颜色 */
     --smallcode-bg-color: #eeeeee;          /* 小代码块的背景颜色 */
-    --smallcode-text-color: var(--text-color);       /* 小代码块的文本颜色 */
+    --smallcode-text-color: var(--text-color);/* 小代码块的文本颜色 */
     --blockquote-bg-color: #dfe2e541;       /* 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */         
     --hr-color: #e2e4e8;                    /* 水平分割线(Horizontal Rule)的颜色 */     
     --blockquote-text-color: #666666;       /* 被引用文本的颜色 */
@@ -56,7 +57,7 @@
 /******************************* 这里定义一些全局信息 ******************************/
 
 html {
-    font-size: 16px;
+    font-size: 17px;
 }
 html, body, #write {
     background: white;
@@ -104,12 +105,13 @@ a {
 }
 /* 鼠标移动到上面时颜色加深 */
 a:hover {
-    color: #222222;
-    border-bottom: 1px solid #222222;
+    color: var(--theme-blue);
+    border-bottom: 1px solid var(--theme-blue);
 }
 
 /******************************* 这里定义[ToC]的样式 *******************************/
 
+/* 计数器 cnt counter */
 .md-toc-content {
     counter-reset: h1toc;
 }
@@ -200,8 +202,8 @@ h6 tt, h6 code {
 .md-fences {
     background-color: #f0f2f3;
     font-family: var(--code-font);     
-    margin-bottom: 15px;
-    margin-top: 15px;
+    margin-bottom: 0.9375rem;
+    margin-top: 0.9375rem;
     border-radius: var(--small-border-radius);
 }
 code {                            
@@ -215,8 +217,8 @@ code {
     vertical-align: 3%;
 }
 .CodeMirror-sizer {
-    padding-top: 8px;
-    padding-bottom: 8px !important;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem !important;
     background-color: var(--bigcode-bg-color);  
     border-top-right-radius: var(--small-border-radius);
     border-bottom-right-radius: var(--small-border-radius);
@@ -230,7 +232,7 @@ code {
     background-color: transparent;
 }
 .CodeMirror-line {
-    padding-left: 10px !important;
+    padding-left: 0.625rem !important;
 }
 /* 取消默认的竖线, 并撑大行号栏 */
 .CodeMirror-gutters {
@@ -240,7 +242,8 @@ code {
 }
 /* 语言选择提示框 */
 .code-tooltip {
-    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    /* box-shadow: 0 1px 1px 0 rgba(0,28,36,.3); */
+    box-shadow: none;
     border-top: 1px solid #eef2f2;
 }
 
@@ -248,7 +251,7 @@ code {
 /******************************* 这里定义大纲的样式 ******************************/
 
 /* 侧边栏大纲的计数器标号 */
-.sidebar-content {counter-reset: sb_cnt_h1;}
+/* .sidebar-content {counter-reset: sb_cnt_h1;}
 .outline-h1 {counter-reset: sb_cnt_h2;}
 .outline-h2 {counter-reset: sb_cnt_h3;}
 .outline-h1>.outline-item>.outline-label:before {
@@ -263,7 +266,7 @@ code {
     counter-increment: sb_cnt_h3;
     content: counter(sb_cnt_h2) "."counter(sb_cnt_h3) ". ";
 }
-
+ */
 
 /******************************* 这里定义标题的样式 ******************************/
 
@@ -281,7 +284,7 @@ h1 {
 }
 h2 {
     font-size: 1.3rem;
-    color: rgb(53, 94, 138);
+    color: var(--theme-blue);
 }
 h3 {
     font-size: 1.1rem;
@@ -292,11 +295,11 @@ h4 {
 }
 h4:before{
     content: "[ ";
-    color:rgb(53, 94, 138)
+    color:var(--theme-blue);
 }
 h4::after{
     content: " ]";
-    color:rgb(53, 94, 138)
+    color:var(--theme-blue);
 }
 h5, h6 {
     font-size: 1rem;
@@ -330,20 +333,20 @@ h1 {counter-reset: cnt_h2;}
 h2 {counter-reset: cnt_h3;} 
 h1:before {
     counter-increment: cnt_h1;
-    content: "§" counter(cnt_h1) "  ";
+    /* content: "§" counter(cnt_h1) "  "; */
     font-weight: normal;
 }
 h2:before {
     counter-increment: cnt_h2;
-    content: counter(cnt_h2) ". ";
+    /* content: counter(cnt_h2) ". "; */
     font-weight: normal;
-    color: rgb(53, 94, 138);
+    color: inherit;
 }
 h3:before {
     counter-increment: cnt_h3;
-    content: counter(cnt_h2) "." counter(cnt_h3) ". ";
+    /* content: counter(cnt_h2) "." counter(cnt_h3) ". "; */
     font-weight: normal;
-    /* color: rgb(152, 51, 48); */
+    color: inherit;
 }
 
 /******************************* 这里定义列表的样式 ******************************/
@@ -351,17 +354,17 @@ h3:before {
 p, blockquote, ul, ol, dl, table{
     margin: 0.8em 0;
 }
-li>ol, li>ul {
+li > ol, li > ul {
     margin: 0 0;
 }
 li p.first {
     display: inline-block;
 }
 ul {
-    padding-left: 20px;         
+    padding-left: 1.25rem;         
 }
 ol {
-    padding-left: 23px;
+    padding-left: 1.4375rem;
     /* list-style-type: upper-roman; */
 }
 /* ol ol {
@@ -377,6 +380,21 @@ ul:last-child, ol:last-child {
 li p {
     margin: 0 0;
 }
+/* 文本紧邻列表时, 间距减小 */
+div#write > p + ol, 
+div#write > p + ul{
+    margin-top: -0.4rem;
+}
+/* blockquote 中文本紧邻列表时, 间距减小, 
+    这里减得少, 是因为 li > ol/ul 的 margin: 0 0 */
+blockquote > p + ol, 
+blockquote > p + ul{
+    margin-top: 0rem;
+}
+/* 小标题(h4)紧邻列表时, 间距减小 */
+h4 + ol, h4 + ul {
+    margin-top: 0.5rem;
+}
 
 /******************************* 这里定义段落的样式 ******************************/
 
@@ -390,6 +408,10 @@ span {
 }
 .md-fences span {
     line-height: 1.6;
+}
+/* 小标题(h4)紧邻段落时, 间距减小 */
+h4 + p {
+    margin-top: 0.4rem;
 }
 
 
@@ -405,8 +427,8 @@ img {
 /******************************* 这里定义引用块的样式 ******************************/
 
 blockquote {
-    border-left: 7px solid #ddd;
-    padding: 5px 10px 3px 14px;  
+    border-left: 0.42rem solid #ddd;
+    padding: 0.3125rem 0.625rem 0.1875rem 0.875rem;  
     background-color: var(--blockquote-bg-color);
     color: var(--blockquote-text-color);  
     border-top-right-radius: var(--big-border-radius);  
@@ -421,9 +443,12 @@ blockquote blockquote {
 p + blockquote {                                    
     margin-top: 0.25rem;
 }
-/* 引用块内的最后一个大公式块的下边距增大 */
-blockquote .mathjax-block:last-child {
-    margin-bottom: 1.111rem;
+/* 引用块内的最后一个大公式块/图片/代码块/引用块的下边距增大 */
+blockquote .mathjax-block:last-child, 
+blockquote img:last-child,
+blockquote .md-fences:last-child,
+blockquote blockquote:last-child {
+    margin-bottom: 1.111rem !important;
 }
 
 
@@ -445,11 +470,11 @@ table tr th {
     font-weight: bold;
     border-bottom: 0;
     margin: 0;
-    padding: 6px 13px;
+    padding: 0.375rem 0.8125rem;
 }
 table tr td {
     margin: 0;
-    padding: 6px 13px;
+    padding: 0.375rem 0.8125rem;
 }
 table tr th:first-child,
 table tr td:first-child {
@@ -516,8 +541,8 @@ em {
 }
 /* 删除线的微调 */
 del {
-    /* text-decoration-color: #285e8e; */
-    text-decoration-thickness: 2px;
+    text-decoration-color: var(--text-color);
+    text-decoration-thickness: 0.09rem;
     color: var(--blockquote-text-color);
     padding-left: 0.2rem;
     padding-right: 0.2rem;
@@ -618,8 +643,8 @@ del {
 }
 
 .md-toc { 
-    margin-top:20px;
-    padding-bottom:20px;
+    margin-top: 1.25rem;
+    padding-bottom: 1.25rem;
 }
 
 .sidebar-tabs {
