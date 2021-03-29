@@ -601,6 +601,7 @@ del {
 
 @media print {
     html {
+        font-size: 13px;
         padding: 0 !important;
         margin: 0 !important;
     }
