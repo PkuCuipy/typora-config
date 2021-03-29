@@ -198,7 +198,7 @@ h3 tt, h3 code,
 h4 tt, h4 code,
 h5 tt, h5 code,
 h6 tt, h6 code {
-    font-size: 1rem;
+    font-size: 0.9em;
 }
 
 .md-fences {
@@ -240,8 +240,8 @@ code {
 /* 取消默认的竖线, 并撑大行号栏 */
 .CodeMirror-gutters {
     border-right-style: none;   
-    padding-right: 4px;
-    padding-left: 4px;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
 }
 /* 语言选择提示框 */
 .code-tooltip {
@@ -615,10 +615,6 @@ del {
     pre {
         word-wrap: break-word;
     }
-    /* .typora-export p {
-        font-size: 13px;
-    } */
-
 }
 
 
