@@ -35,6 +35,7 @@
     --side-bar-bg-color: #fafafa;
     /* 这些是这个文件自己用到的变量 */
     --text-color: #555555;                  /* 正常文本的颜色 */
+    --code-color: rgb(77, 77, 76);          /* 代码文本的颜色 */
     --theme-blue: rgb(53, 94, 138);         /* 主题蓝色 */
     --bigcode-bg-color: #f7f7f7;            /* 大代码块的背景颜色 */
     --smallcode-bg-color: #eeeeee;          /* 小代码块的背景颜色 */
@@ -51,6 +52,7 @@
     --small-border-radius: 1px;
     --border-color: #e7eaed;
     --underline-color: #cccccc;
+
 }
 
 
@@ -196,11 +198,12 @@ h3 tt, h3 code,
 h4 tt, h4 code,
 h5 tt, h5 code,
 h6 tt, h6 code {
-    font-size: inherit;
+    font-size: 1rem;
 }
 
 .md-fences {
     background-color: #f0f2f3;
+    color: var(--code-color);
     font-family: var(--code-font);     
     margin-bottom: 0.9375rem;
     margin-top: 0.9375rem;
@@ -208,7 +211,7 @@ h6 tt, h6 code {
 }
 code {                            
     background-color: var(--smallcode-bg-color);    
-    color: var(--smallcode-text-color);
+    color: var(--code-color);
     padding: 2px 4px 2px 4px;
     margin: 0 2px 0 2px;
     font-family: var(--code-font);
@@ -246,6 +249,43 @@ code {
     box-shadow: none;
     border-top: 1px solid #eef2f2;
 }
+
+/* 语法高亮的修改 */
+.cm-tag, 
+.cm-keyword,
+.cm-builtin {
+    color: #8959a8 !important;
+}
+.cm-comment {
+    color: #8e908c !important;
+}
+.cm-error {
+  color: #c82829 !important;
+}
+.cm-meta {
+  color: #f5871f !important;
+}
+.cm-string, 
+.cm-string-2 {
+  color: #718c00 !important;
+}
+.cm-number {
+  color: #3e999f !important;
+}
+.cm-qualifier, 
+.cm-def,
+.cm-operator,
+.cm-variable-1,
+.cm-variable-2,
+.cm-variable-3,
+.cm-atom {
+  color: #4271ae !important;
+}
+.cm-variable,
+.cm-property {
+    color:var(--code-color) !important;
+}
+
 
 
 /******************************* 这里定义大纲的样式 ******************************/
@@ -325,8 +365,6 @@ blockquote + h3,
     margin-top: 2rem;
 }
 
-
-
 /* 标题计数器 */
 body {counter-reset: cnt_h1;}
 h1 {counter-reset: cnt_h2;} 
@@ -365,11 +403,7 @@ ul {
 }
 ol {
     padding-left: 1.4375rem;
-    /* list-style-type: upper-roman; */
 }
-/* ol ol {
-    list-style-type: lower-roman;
-} */
 ul:first-child, ol:first-child {
     margin-top: 0;
 }
@@ -377,19 +411,15 @@ ul:last-child, ol:last-child {
     margin-bottom: 0;
 }
 /* 列表中的段落不设置边界了, 因为间距太大太丑. */
-li p {
+li > p {
     margin: 0 0;
 }
 /* 文本紧邻列表时, 间距减小 */
 div#write > p + ol, 
-div#write > p + ul{
-    margin-top: -0.4rem;
-}
-/* blockquote 中文本紧邻列表时, 间距减小, 
-    这里减得少, 是因为 li > ol/ul 的 margin: 0 0 */
+div#write > p + ul,
 blockquote > p + ol, 
-blockquote > p + ul{
-    margin-top: 0rem;
+blockquote > p + ul {
+    margin-top: -0.4rem;
 }
 /* 小标题(h4)紧邻列表时, 间距减小 */
 h4 + ol, h4 + ul {
@@ -428,7 +458,7 @@ img {
 
 blockquote {
     border-left: 0.42rem solid #ddd;
-    padding: 0.3125rem 0.625rem 0.1875rem 0.875rem;  
+    padding: 0.125rem 0.625rem 0.1875rem 0.875rem;  
     background-color: var(--blockquote-bg-color);
     color: var(--blockquote-text-color);  
     border-top-right-radius: var(--big-border-radius);  
@@ -533,7 +563,7 @@ mark {
 u {
     text-decoration: none;
     border-bottom: 1px solid var(--underline-color);
-    padding-bottom: 0.5px;
+    padding-bottom: 0.03125rem;
 }
 /* <斜体>修改右侧对齐量, 防止最右侧的斜体字"插进"正体字里 */
 em {
