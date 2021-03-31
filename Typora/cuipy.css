@@ -41,7 +41,7 @@
     --smallcode-bg-color: #eeeeee;          /* 小代码块的背景颜色 */
     --smallcode-text-color: var(--text-color);/* 小代码块的文本颜色 */
     --blockquote-bg-color: #dfe2e541;       /* 半透明好调节, 而且可以让多层嵌套时颜色逐层加深 */         
-    --hr-color: #e2e4e8;                    /* 水平分割线(Horizontal Rule)的颜色 */     
+    --hr-color: #ddd;                       /* 水平分割线(Horizontal Rule)的颜色 */     
     --blockquote-text-color: #666666;       /* 被引用文本的颜色 */
     --code-font: "Menlo";                     /* 代码字体 */
     --google-font: "Noto Sans CJK SC";
@@ -90,11 +90,18 @@ html, body, #write {
 /******************************* 这里定义水平线的样式 ******************************/
 
 hr {
-    /* margin: 3em auto; */
+    margin: 1.25rem 0;
+    height: 0.125rem;
     width: 100%;
-    max-width: 100%;
     border: none;
-    border-top: 1px solid var(--hr-color);
+    background-color: var(--hr-color);
+    background-image:                   
+            /* 在这里, [0,0.25rem] 是白色, [0.25rem,0.5rem] 是透明色(从而露出背景色 hr-color) */
+            repeating-linear-gradient(-45deg,
+            #fff 0px,           /* color_i stop-point_i */
+            #fff 0.25rem, 
+            transparent 0.25rem,  /* 用透明来露出 background-color */
+            transparent 0.5rem);
 }
 
 /******************************* 这里定义链接的样式 *******************************/
