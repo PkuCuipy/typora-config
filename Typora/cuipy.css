@@ -443,6 +443,8 @@ p {
 span {
     line-height: 2.0;
 }
+/* 但这两个位置不要被改成 2.0! */
+table span,
 .md-fences span {
     line-height: 1.6;
 }
@@ -457,9 +459,10 @@ h4 + p {
 /* 图片外加圆角边框 */
 img {
     border-radius: var(--small-border-radius);
-    border: 2px solid  rgba(0,0,0,0.1);
+    box-shadow: 0 0px 5px rgba(0,0,0,0.1);
     padding: 0 0 0 0;
 }
+
 
 /******************************* 这里定义引用块的样式 ******************************/
 
@@ -563,6 +566,7 @@ table tr:last-child td:first-child {border-bottom-left-radius: var(--big-border-
 
 /* 修改高亮的颜色, 以及柔和的边框, 类似小代码块<code> */
 mark {
+    color: var(--text-color);
     background-color: var(--highlight-color);
     border-radius: var(--big-border-radius); 
 }
@@ -606,9 +610,13 @@ del {
 
 /*************************** 这里定义打印或者导出PDF的样式 **************************/
 
+
+/** 导出pdf的页边距, 然而 Safari 不支持 @page */
+/* @page { margin: 0mm 0mm; } */
+
 @media print {
     html {
-        font-size: 13px;
+        font-size: 13px !important;
         padding: 0 !important;
         margin: 0 !important;
     }
