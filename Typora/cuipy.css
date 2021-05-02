@@ -1,42 +1,26 @@
 /*
-    这个假期没少折腾 Typora 的 CSS 样式
-    搞来搞去发现审美是个循环, 主要就是爱折腾.
-    不吐槽自己了.
-    这个主题的模板仍然是 github.css , 
-    并且参考注释更为清晰的 vintage.css
-    这里说一下这次以自己命名的主题要做什么, 
-    包括一些笔记.
-    
-    1. 列表的缩进, 在 Github 主题下, 
-        无序/有序列表相比于正常的文字会靠右, 我改掉了这个.
-    2. 原来的自动折行和软换行的间距为0, 这真的太难看了.
-    3. 看到一个博客的格式很好, 我就基本上抄过来了. 
-        在那个博客中, 代码块和左侧的标号是用一个 table 实现的,
-        相比于 Typora 这个及其复杂的结构真是不知道高到哪里去了x
-        总之为了实现类似的效果, 没少折腾, 最后的 css 实现也蛮丑陋的.
-    4. 标题太大太丑, 减小了大小, 同时增加了css计数器实现自动标号. (标号功能后来已取消)
-    5. 文本紧接着的 blockquote 很大程度上是对这个文本进行"注释", 
-        针对这种情形缩小间距. 否则有很强的的分离感.
-    6. 改用 Google 的 Noto 字体, 而非苹果的 PingFang 字体. 
-    7. 现在(2021/2/25)的一切都很令人满意了, 少折腾点吧, 还有7天选课截止, 还有10天就开学了.
-    8. 小代码块 0.9em 的字体也确实应该如此, 因为这个字体看起来偏大, 外加外框会让这个元素变得更大
-        尽管如此, 小代码块有点偏下. 因此使用 vertical-align:3% 来修正. 
-        顺便发现浏览器微调这个数据时, 可以使用上下方向键来以 1% 为间隔进行微调.
-        因此顺便发现自己之前一个<误区>, 即以为只有某几个特殊的百分比才会有调整. 
-        而事实上是都有, 只不过有的时候特别细微, 甚至导致在一些元素上渲染没变, 但在另外一些元素上就能看出差异.
-        然而如果按住 option 来进行 0.1% 间隔微调, 则发现确实是在某些格子时发生跳变. anyway.
+    Author: PkuCuipy
+    Date: 2021/2 - 2021/5, still updating...
+    CSS Code Reference: github.css & vintage.css
+    CSS Style Reference: Weitang Li's blog (liwt31.github.io)
+
+    Margin Top: 16mm
+    Margin Bottom: 16mm
+    Margin Left: 20mm
+    Margin Right: 20mm
+    Width x Height: 311.2mm x 440.1mm
 
 */
 
 
 :root {
 
-    /* Typora 定义的变量 */
+    /* Typora 定义的 */
     --control-text-color: #777;
     --side-bar-bg-color: #fafafa;
     --ui-bg-color: #fafafa;
     
-    /* Cuipy 定义的变量 */
+    /* Cuipy 定义的 */
     --text-color: #555555;                      /* 文本颜色 */
     --code-color: rgb(77, 77, 76);              /* 代码颜色 */
     --theme-blue: rgb(53, 94, 138);             /* 主题蓝色 */
@@ -54,9 +38,12 @@
 
     --code-editing-font: "Menlo";                                           /* 代码 - 编辑 */
     --text-editing-font: "Noto Sans CJK SC", sans-serif;                    /* 文本 - 编辑 */
-    
+
     --code-export-font:  "Latin Modern Mono", "Menlo";                      /* 代码 - 导出 */
     --text-export-font:  "Latin Modern Roman", "Noto Serif CJK SC", Serif;  /* 文本 - 导出 */
+
+    --h2h3number-export-font: "Latin Modern Roman", Serif;
+    --h2h3text-export-font: "Noto Sans CJK SC", sans-serif; 
 
 }
 
@@ -71,25 +58,19 @@ html, body, #write {
     font-family: var(--text-editing-font);
     font-weight: normal;
     color: var(--text-color);   
-    line-height: 1.6;   /* General line-height. Specified in specific elements */
+    line-height: 1.6;       /* General line-height. Specified in specific elements */
     margin: auto;
   	padding: 30px;
     padding-bottom: 100px;
 }
 
 /* 当屏幕足够大时, 扩展 max-width 以更好地适应屏幕 */
-#write {
-    max-width: 860px;
-}
+#write {max-width: 860px;}
 @media only screen and (min-width: 1400px) {    
-	#write {
-		max-width: 1024px;
-	}
+	#write {max-width: 1024px;}
 }
 @media only screen and (min-width: 1800px) {
-	#write {
-		max-width: 1200px;
-	}
+	#write {max-width: 1200px;}
 }
 
 /******************************* 这里定义水平线的样式 ******************************/
@@ -99,11 +80,10 @@ hr {
     height: 0.125rem;
     width: 100%;
     border: none;
-
     background-image:                   
-            /* 在这里, [0,0.25rem] 是白色, [0.25rem,0.5rem] 是 hr-color 色 */
-            repeating-linear-gradient(-45deg,
-            #fff 0px,           /* color_i stop-position_i */
+        /* 在这里, [0,0.25rem] 是白色, [0.25rem,0.5rem] 是 hr-color 色 */
+        repeating-linear-gradient(-45deg,
+            #fff 0px,               /* color_i stop-position_i */
             #fff 0.25rem, 
             var(--hr-color) 0.25rem,
             var(--hr-color) 0.5rem);
@@ -210,9 +190,10 @@ h3 tt, h3 code,
 h4 tt, h4 code,
 h5 tt, h5 code,
 h6 tt, h6 code {
-    font-size: 0.9em;
+    font-size: 0.9em;   /* in Headings */
 }
 
+/* 调整大代码块, 使其看起来和目标博客类似. 实现起来非常丑陋! */
 .md-fences {
     background-color: #f0f2f3;
     color: var(--code-color);
@@ -242,22 +223,22 @@ code {
     padding-right: 1px !important;
     color: #889194 !important;
 }
-/* 默认是继承背景色, 会导致边角处越过圆弧线 */
 .CodeMirror-scroll .CodeMirror.cm-s-inner{
-    background-color: transparent;
+    background-color: transparent;          /* 默认是继承(inherit)背景色, 但那样会导致边角处越过圆弧线 */
 }
 .CodeMirror-line {
     padding-left: 0.625rem !important;
 }
+
 /* 取消默认的竖线, 并撑大行号栏 */
 .CodeMirror-gutters {
     border-right-style: none;   
     padding-right: 0.25rem;
     padding-left: 0.25rem;
 }
+
 /* 语言选择提示框 */
 .code-tooltip {
-    /* box-shadow: 0 1px 1px 0 rgba(0,28,36,.3); */
     box-shadow: none;
     border-top: 1px solid #eef2f2;
 }
@@ -303,22 +284,22 @@ code {
 /******************************* 这里定义大纲的样式 ******************************/
 
 /* 侧边栏大纲的计数器标号 */
-/* .sidebar-content {counter-reset: sb_cnt_h1;}
-.outline-h1 {counter-reset: sb_cnt_h2;}
-.outline-h2 {counter-reset: sb_cnt_h3;}
+.sidebar-content {counter-reset: sb_h1_cnt;}
+.outline-h1 {counter-reset: sb_h2_cnt;}
+.outline-h2 {counter-reset: sb_h3_cnt;}
 .outline-h1>.outline-item>.outline-label:before {
-    counter-increment: sb_cnt_h1;
-    content: "§" counter(sb_cnt_h1, upper-alpha) ". ";
+    counter-increment: sb_h1_cnt;
+    content: "§" counter(sb_h1_cnt) ". ";
 }
 .outline-h2>.outline-item>.outline-label:before {
-    counter-increment: sb_cnt_h2;
-    content: counter(sb_cnt_h2) ". ";
+    counter-increment: sb_h2_cnt;
+    content: counter(sb_h1_cnt) "." counter(sb_h2_cnt) "  "
 }
 .outline-h3>.outline-item>.outline-label:before {
-    counter-increment: sb_cnt_h3;
-    content: counter(sb_cnt_h2) "."counter(sb_cnt_h3) ". ";
+    counter-increment: sb_h3_cnt;
+    content: counter(sb_h1_cnt) "." counter(sb_h2_cnt) "." counter(sb_h3_cnt) ". ";
 }
- */
+
 
 /******************************* 这里定义标题的样式 ******************************/
 
@@ -364,7 +345,6 @@ h2 + h3 {
     margin-top: 1rem;
 }
 
-
 /* 微调, 关于标题和功能块的间距 */
 blockquote + h2, 
 .md-fences + h2, 
@@ -378,25 +358,62 @@ blockquote + h3,
 }
 
 /* 标题计数器 */
-body {counter-reset: cnt_h1;}
-h1 {counter-reset: cnt_h2;} 
-h2 {counter-reset: cnt_h3;} 
-h1:before {
-    counter-increment: cnt_h1;
-    /* content: "§" counter(cnt_h1) "  "; */
-    font-weight: normal;
-}
-h2:before {
-    counter-increment: cnt_h2;
-    /* content: counter(cnt_h2) ". "; */
-    font-weight: normal;
-    color: inherit;
-}
-h3:before {
-    counter-increment: cnt_h3;
-    /* content: counter(cnt_h2) "." counter(cnt_h3) ". "; */
-    font-weight: normal;
-    color: inherit;
+/* @media screen {
+    body {counter-reset: h1_cnt;}
+    h1 {counter-reset: h2_cnt;} 
+    h2 {counter-reset: h3_cnt;} 
+    h1:before {
+        counter-increment: h1_cnt;
+        content: "§" counter(h1_cnt) "  ";
+        font-weight: normal;
+    }
+    h2:before {
+        counter-increment: h2_cnt;
+        content: counter(h2_cnt) ". ";
+        font-weight: normal;
+        color: inherit;
+    }
+    h3:before {
+        counter-increment: h3_cnt;
+        content: counter(h2_cnt) "." counter(h3_cnt) ". ";
+        font-weight: normal;
+        color: inherit;
+    }
+} */
+@media print {
+    body {
+        counter-reset: h1_cnt;
+    }
+    h1 {
+        counter-reset: h2_cnt;
+    } 
+    h2 {
+        counter-reset: h3_cnt;
+        font-family: var(--h2h3text-export-font);
+    } 
+    h3 {
+        font-family: var(--h2h3text-export-font);
+    }
+    h1:before {
+        counter-increment: h1_cnt;
+        font-weight: normal;
+    }
+    h2:before {
+        counter-increment: h2_cnt;
+        content: counter(h2_cnt);
+        font-weight: normal;
+        color: inherit;
+        margin-right: 2rem;
+        font-family: var(--h2h3number-export-font);
+    }
+    h3:before {
+        counter-increment: h3_cnt;
+        content: counter(h2_cnt) "." counter(h3_cnt);
+        font-weight: normal;
+        color: inherit;
+        margin-right: 2rem;
+        font-family: var(--h2h3number-export-font);
+    }
 }
 
 /******************************* 这里定义列表的样式 ******************************/
@@ -461,11 +478,12 @@ h4 + p {
 
 /******************************* 这里定义图片的样式 ******************************/
 
-/* 图片外加圆角边框 */
 img {
     border-radius: var(--small-border-radius);
     box-shadow: 0 0px 5px rgba(0,0,0,0.1);
     padding: 0 0 0 0;
+    margin: 0 auto;
+    display: block;
 }
 span[md-inline="imgtag"] {  /* 有的时候图片会左对齐, 没仔细研究原因, 先打个补丁 */
     display: block;
@@ -481,13 +499,12 @@ span[md-inline="imgtag"] + span[md-inline="plain"] {    /* 在设置了图片缩
     color: #aaa;
     margin-top: 0.15rem;
 }
-img + span {                                            /* 导出为 html / pdf 时, 图片没办法居中, 故注释也不居中了 */
+img + span {                                            /* 导出为 html / pdf 时 */
     display: block;
-    text-align: left;
+    text-align: center;
     font-size: 0.9rem;
     color: #aaa;
     margin-top: 0.15rem;
-    padding-left: 5%;
 }
 
 
@@ -645,8 +662,15 @@ del {
 /*************************** 这里定义打印或者导出PDF的样式 **************************/
 
 
-/** 导出pdf的页边距, 然而 Safari 不支持 @page, 新版本 Typora 的 Preference 里可以设置页边距了! */
-/* @page { margin: 0mm 0mm; } */
+/** 导出pdf的页边距, 然而 Safari 不支持 @page, 
+    不过最新版本的 Typora 的 Preference 里可以设置页边距了! 
+    具体地, 设置:
+        Margin Top: 16mm
+        Margin Bottom: 16mm
+        Margin Left: 20mm
+        Margin Right: 20mm
+        Width x Height: 311.2mm x 440.1mm
+*/
 
 @media print {
     html {
