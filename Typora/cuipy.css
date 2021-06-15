@@ -1,6 +1,6 @@
 /*
     Author: PkuCuipy
-    Date: 2021/2 - 2021/5, still updating...
+    Date: 2021/2 - 2021/6, still updating...
     CSS Code Reference: github.css & vintage.css
     CSS Style Reference: Weitang Li's blog (liwt31.github.io)
 
@@ -36,13 +36,14 @@
     --big-border-radius: 5px;                     /* 大半径 */
     --small-border-radius: 1px;                   /* 小半径 */
 
-    --code-editing-font: "Menlo";                                           /* 代码 - 编辑 */
-    --text-editing-font: "Noto Sans CJK SC", sans-serif;                    /* 文本 - 编辑 */
+    /* Typora 编辑时字体 */
+    --code-editing-font: "Menlo";                                                   /* 代码 - 编辑 */
+    --text-editing-font: "Noto Sans CJK SC", sans-serif;                            /* 文本 - 编辑 */
 
-    --code-export-font:  "Latin Modern Mono", "Menlo";                      /* 代码 - 导出 */
-    --text-export-font:  "Latin Modern Roman", "Noto Serif CJK SC", Serif;  /* 文本 - 导出 */
-    --boldtext-export-font: "Noto Sans CJK SC";                             /* 加粗 - 导出 */
-
+    /* 导出为 pdf 时的字体 */
+    --code-export-font:  "Latin Modern Mono", "Menlo";                              /* 代码 - 导出 */
+    --text-export-font:  "Latin Modern Roman", "Noto Serif CJK SC", Serif;          /* 文本 - 导出 */
+    --boldtext-export-font: "Noto Sans CJK SC";                                     /* 加粗 - 导出 */
     --h2h3number-export-font: "Latin Modern Roman", "Noto Serif CJK SC", Serif;
     --h2h3h4text-export-font: "Latin Modern Roman", "Noto Sans CJK SC", sans-serif; 
 
@@ -104,6 +105,13 @@ a:hover {
     color: var(--theme-blue);
     border-bottom: 1px solid var(--theme-blue);
 }
+/* 网页链接 or 文件链接 */
+/* a[href]::after {
+    color: #285e8e;
+    vertical-align: 0.5rem;
+    content: " [link]";
+    font-size: 0.5rem;
+} */
 
 /******************************* 这里定义[ToC]的样式 *******************************/
 
@@ -182,6 +190,7 @@ a:hover {
 
 .md-task-list-item > input {
     margin-left: -1.3em;
+    top: 0.25rem !important;
 }
 
 /******************************* 这里定义[代码]的样式 ******************************/
@@ -328,18 +337,24 @@ h4 {
     margin-top: 1rem;
     font-size: 1rem;
 }
-h4:before{
+h4:before {
     content: "[ ";
     color:var(--theme-blue);
 }
-h4::after{
+h4::after {
     content: " ]";
     color:var(--theme-blue);
 }
+/* 本主题不支持使用 5、6 级标题 */
 h5, h6 {
     font-size: 1rem;
-    color: red;
+    color:red;
     text-decoration: line-through;
+}
+h5:before, 
+h6:before {
+    content: "(请勿使用五级/六级标题!)  ";
+    color: red;
 }
 
 /* 微调, 关于 h2 和 h3 之间的间距 */
@@ -471,6 +486,13 @@ blockquote > p + ol,
 blockquote > p + ul {
     margin-top: -0.4rem;
 }
+/* 同类列表的 li 紧邻时, margin "取消".
+   备注: 经过深思熟虑(x), 还是决定加上这个特性.
+   因为当两个 li 相邻时, 往往我们就认为他们属于同一个 ul.*/
+div#write > ul + ul,
+div#write > ol + ol {
+    margin-top: -0.8rem;
+}
 /* 小标题(h4)紧邻列表时, 间距减小 */
 h4 + ol, h4 + ul {
     margin-top: 0.5rem;
@@ -519,6 +541,7 @@ span[md-inline="imgtag"] + span[md-inline="plain"] {    /* 在设置了图片缩
     font-size: 0.9rem;
     color: #aaa;
     margin-top: 0.15rem;
+    margin-bottom: 0.3rem;
 }
 img + span {                                            /* 导出为 html / pdf 时 */
     display: block;
@@ -526,6 +549,7 @@ img + span {                                            /* 导出为 html / pdf 
     font-size: 0.9rem;
     color: #aaa;
     margin-top: 0.15rem;
+    margin-bottom: 0.3rem;
 }
 
 
@@ -559,9 +583,9 @@ blockquote blockquote:last-child {
 }
 
 /* 更新 Typora 之后, 
-    内联公式的大小好像有 bug... */
-.inline-math-svg {              /* 渲染变小 */
-    font-size: 0.9rem !important;
+    内联 LaTeX 公式的大小好像有 bug... */
+.inline-math-svg {              /* 渲染变小, 注意是 em */
+    font-size: 0.9em !important;
 }
 #math-inline-preview-content {  /* 下方预览框变小 */
     font-size: 0.9rem !important;
@@ -662,6 +686,15 @@ del {
 #typora-sidebar span {
     line-height: 1.5;
 }
+
+/* 侧边栏表示层次结构的偏移量 */
+.file-library-node.file-tree-node {
+    margin-left: 0.4rem;
+}
+.file-library-node.file-tree-node.file-node-root {
+    margin-left: -0.6rem;
+}
+
 
 /*************************** 这里定义打印或者导出PDF的样式 **************************/
 
