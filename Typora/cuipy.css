@@ -37,15 +37,15 @@
     --small-border-radius: 1px;                   /* 小半径 */
 
     /* Typora 编辑时字体 */
-    --code-editing-font: "Menlo";                                                   /* 代码 - 编辑 */
-    --text-editing-font: "Noto Sans CJK SC", sans-serif;                            /* 文本 - 编辑 */
+    --code-editing-font: "Menlo";                                                 
+    --text-editing-font: "Noto Sans CJK SC", sans-serif;                         
 
     /* 导出为 pdf 时的字体 */
-    --code-export-font:  "Latin Modern Mono", "Menlo";                              /* 代码 - 导出 */
-    --text-export-font:  "Latin Modern Roman", "Noto Serif CJK SC", Serif;          /* 文本 - 导出 */
-    --boldtext-export-font: "Noto Sans CJK SC";                                     /* 加粗 - 导出 */
+    --code-export-font:  "Latin Modern Mono", "Menlo";  
+    --text-export-font:  "Latin Modern Roman", "Noto Serif CJK SC", Serif; 
+    --boldtext-export-font: "Noto Sans CJK SC";                                  
     --h2h3number-export-font: "Latin Modern Roman", "Noto Serif CJK SC", Serif;
-    --h2h3h4text-export-font: "Latin Modern Roman", "Noto Sans CJK SC", sans-serif; 
+    --h2h3h4text-export-font: "Noto Sans CJK SC", sans-serif; 
 
 }
 
@@ -397,60 +397,7 @@ blockquote + h3,
         color: inherit;
     }
 } */
-@media print {
-    body {
-        counter-reset: h1_cnt;
-    }
-    h1 {
-        counter-reset: h2_cnt;
-    } 
-    h2 {
-        counter-reset: h3_cnt;
-        font-family: var(--h2h3h4text-export-font);
-        color: #000 !important;
-    } 
-    h3 {
-        font-family: var(--h2h3h4text-export-font);
-    }
-    h4 {
-        font-family: var(--h2h3h4text-export-font);
-    }
-    h4:before{
-        content: "[ ";
-        color: #333 !important;
-    }
-    h4::after{
-        content: " ]";
-        color: #333 !important;
-    }
-    h1:before {
-        counter-increment: h1_cnt;
-        font-weight: normal;
-    }
-    h2:before {
-        counter-increment: h2_cnt;
-        content: counter(h2_cnt);
-        margin-right: 2rem;
-        color: inherit;
-        font-family: var(--h2h3number-export-font);
-        font-weight: bold;
-        vertical-align: 3%;
-    }
-    h3:before {
-        counter-increment: h3_cnt;
-        content: counter(h2_cnt) "." counter(h3_cnt);
-        margin-right: 2rem;
-        color: inherit;
-        font-family: var(--h2h3number-export-font);
-        font-weight: bold;
-    }
-    /* 表格头部使用黑体, 而非宋体 */
-    th {
-        font-family: var(--boldtext-export-font) !important;
-        font-weight: 500 !important;
-    }
 
-}
 
 /******************************* 这里定义列表的样式 ******************************/
 
@@ -699,26 +646,23 @@ del {
 /*************************** 这里定义打印或者导出PDF的样式 **************************/
 
 
-/** 导出pdf的页边距, 然而 Safari 不支持 @page, 
+/*  导出pdf的页边距, 然而 Safari 不支持 @page, 
     不过最新版本的 Typora 的 Preference 里可以设置页边距了! 
-    具体地, 设置:
-        Margin Top: 16mm
-        Margin Bottom: 16mm
-        Margin Left: 16mm
-        Margin Right: 16mm
-        Width x Height: 311.2mm x 440.1mm
+    具体地, 在 Typora 的偏好设置中:
+    - Margin Top:       16mm
+    - Margin Bottom:    16mm
+    - Margin Left:      16mm
+    - Margin Right:     16mm
+    - Width x Height:   311.2mm x 440.1mm   
 */
 
 @media print {
     html {
-        /* font-size: 17px !important; */
         padding: 0 !important;
         margin: 0 4mm !important;
     }
     html, body, #write {
-        font-family: var(--text-export-font) !important;
-        max-width: 1234567890px !important;                 /* 导出时, 尽可能宽都无所谓 */
-        color: #000;
+        max-width: 999999999px !important;                 /* 导出时, 尽可能宽都无所谓 */
     }
     #write {
         padding: 0 !important;
@@ -730,13 +674,81 @@ del {
     pre {
         word-wrap: break-word !important;
     }
+
+    /* 
+        使用【LaTeX 风格样式】导出:
+        - 标题计数器
+        - 正文宋体、粗体黑体、代码字体修改
+        - 字体颜色: 纯黑
+        【如不需要, 请注释如下框定的代码范围】
+    */
+    /* ================ 范围起始标定 ================ */
+
+    html, body, #write {
+        font-family: var(--text-export-font) !important;
+        color: #000;
+    }
+    body {
+        counter-reset: h1_cnt;
+    }
+    h1 {
+        counter-reset: h2_cnt;
+    } 
+    h2 {
+        counter-reset: h3_cnt;
+        font-family: var(--h2h3h4text-export-font);
+        color: #000 !important;
+    } 
+    h3 {
+        font-family: var(--h2h3h4text-export-font);
+    }
+    h4 {
+        font-family: var(--h2h3h4text-export-font);
+    }
+    h4:before{
+        content: "[ ";
+        color: #333 !important;
+    }
+    h4::after{
+        content: " ]";
+        color: #333 !important;
+    }
+    h1:before {
+        counter-increment: h1_cnt;
+        font-weight: normal;
+    }
+    h2:before {
+        counter-increment: h2_cnt;
+        content: counter(h2_cnt);
+        margin-right: 2rem;
+        color: inherit;
+        font-family: var(--h2h3number-export-font);
+        font-weight: bold;
+        vertical-align: 3%;
+    }
+    h3:before {
+        counter-increment: h3_cnt;
+        content: counter(h2_cnt) "." counter(h3_cnt);
+        margin-right: 2rem;
+        color: inherit;
+        font-family: var(--h2h3number-export-font);
+        font-weight: bold;
+    }
+    th {
+        font-family: var(--boldtext-export-font) !important;
+        font-weight: 500 !important;
+    }
     .md-fences, code {
         font-family: var(--code-export-font) !important;
     }
     strong {
-        font-family: var(--boldtext-export-font) !important;    /* 加粗文本在导出时使用黑体, 而不是直接对宋体加粗 */
+        font-family: var(--boldtext-export-font) !important;
         font-weight: 500 !important;
     }
+
+    /* ================ 范围结束标定 ================ */
+
+    
 }
 
 
