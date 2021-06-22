@@ -30,8 +30,8 @@
     --blockquote-bg-color: #dfe2e541;           /* 引用块背景色 */         
     --blockquote-text-color: #666666;           /* 引用块文本色 */
     --hr-color: #ddd;                           /* 水平分割线颜色 */     
-    --highlight-color: #ffe3c3;                 /* 高亮块颜色 */
-    --underline-color: #cccccc;                 /* 下划线颜色 */
+    --highlight-color: rgba(163, 85, 163, 0.23);  /* 高亮块颜色 */
+    --underline-color: #cccccc;                   /* 下划线颜色 */
     --table-border-color: #e7eaed;              /* 表格线颜色 */
     --big-border-radius: 5px;                     /* 大半径 */
     --small-border-radius: 1px;                   /* 小半径 */
@@ -595,6 +595,13 @@ mark {
     color: var(--text-color);
     background-color: var(--highlight-color);
     border-radius: var(--big-border-radius); 
+    padding-top: 0px;
+    padding-right: 0.125rem;
+    margin-right: -0.125rem;
+}
+p > span + span > span + mark {
+    padding-left: 0.125rem;
+    margin-left: -0.125rem;
 }
 /* 修改下划线的实现方式(默认下划线->下边框) 提供更多定制空间 */
 u {
