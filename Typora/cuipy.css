@@ -3,12 +3,12 @@
     Date: 2021/2 - 2021/6, still updating...
     CSS Code Reference: github.css & vintage.css
     CSS Style Reference: Weitang Li's blog (liwt31.github.io)
-
+    
     Margin Top: 16mm
     Margin Bottom: 16mm
     Margin Left: 16mm
     Margin Right: 16mm
-    Width x Height: 311.2mm x 440.1mm
+    Width x Height: 313.7mm x 443.6mm (这里是精细调参的结果, 保证预览和导出一致)
 
 */
 
@@ -35,18 +35,8 @@
     --table-border-color: #e7eaed;              /* 表格线颜色 */
     --big-border-radius: 5px;                     /* 大半径 */
     --small-border-radius: 1px;                   /* 小半径 */
-
-    /* Typora 编辑时字体 */
-    --code-editing-font: "Menlo";                                                 
-    --text-editing-font: "Noto Sans CJK SC", sans-serif;                         
-
-    /* 导出为 pdf 时的字体 */
-    --code-export-font:  "Latin Modern Mono", "Menlo";  
-    --text-export-font:  "Latin Modern Roman", "Noto Serif CJK SC", Serif; 
-    --boldtext-export-font: "Noto Sans CJK SC";                                  
-    --h2h3number-export-font: "Latin Modern Roman", "Noto Serif CJK SC", Serif;
-    --h2h3h4text-export-font: "Noto Sans CJK SC", sans-serif; 
-
+    --code-font: "Menlo"; 
+    --text-font: "Noto Sans CJK SC", sans-serif;
 }
 
 
@@ -57,7 +47,7 @@ html {
 }
 html, body, #write {
     background: white;
-    font-family: var(--text-editing-font);
+    font-family: var(--text-font);
     font-weight: normal;
     color: var(--text-color);   
     line-height: 1.6;       /* General line-height. Specified in specific elements */
@@ -208,7 +198,7 @@ h6 tt, h6 code {
 .md-fences {
     background-color: #f0f2f3;
     color: var(--code-color);
-    font-family: var(--code-editing-font);     
+    font-family: var(--code-font);     
     margin-bottom: 0.9375rem;
     margin-top: 0.9375rem;
     border-radius: var(--small-border-radius);
@@ -218,7 +208,7 @@ code {
     color: var(--code-color);
     padding: 2px 4px 2px 4px;
     margin: 0 2px 0 2px;
-    font-family: var(--code-editing-font);
+    font-family: var(--code-font);
     border-radius: var(--big-border-radius);
     font-size: 0.9em;
     vertical-align: 3%;
@@ -373,30 +363,6 @@ blockquote + h3,
 .mathjax-block + h3 {
     margin-top: 2rem;
 }
-
-/* 标题计数器 */
-/* @media screen {
-    body {counter-reset: h1_cnt;}
-    h1 {counter-reset: h2_cnt;} 
-    h2 {counter-reset: h3_cnt;} 
-    h1:before {
-        counter-increment: h1_cnt;
-        content: "§" counter(h1_cnt) "  ";
-        font-weight: normal;
-    }
-    h2:before {
-        counter-increment: h2_cnt;
-        content: counter(h2_cnt) ". ";
-        font-weight: normal;
-        color: inherit;
-    }
-    h3:before {
-        counter-increment: h3_cnt;
-        content: counter(h2_cnt) "." counter(h3_cnt) ". ";
-        font-weight: normal;
-        color: inherit;
-    }
-} */
 
 
 /******************************* 这里定义列表的样式 ******************************/
@@ -599,7 +565,7 @@ mark {
     padding-right: 0.125rem;
     margin-right: -0.125rem;
 }
-p > span + span > span + mark {
+span + span > mark {
     padding-left: 0.125rem;
     margin-left: -0.125rem;
 }
@@ -681,80 +647,6 @@ del {
     pre {
         word-wrap: break-word !important;
     }
-
-    /* 
-        使用【LaTeX 风格样式】导出:
-        - 标题计数器
-        - 正文宋体、粗体黑体、代码字体修改
-        - 字体颜色: 纯黑
-        【如不需要, 请注释如下框定的代码范围】
-    */
-    /* ================ 范围起始标定 ================ */
-
-    html, body, #write {
-        font-family: var(--text-export-font) !important;
-        color: #000;
-    }
-    body {
-        counter-reset: h1_cnt;
-    }
-    h1 {
-        counter-reset: h2_cnt;
-    } 
-    h2 {
-        counter-reset: h3_cnt;
-        font-family: var(--h2h3h4text-export-font);
-        color: #000 !important;
-    } 
-    h3 {
-        font-family: var(--h2h3h4text-export-font);
-    }
-    h4 {
-        font-family: var(--h2h3h4text-export-font);
-    }
-    h4:before{
-        content: "[ ";
-        color: #333 !important;
-    }
-    h4::after{
-        content: " ]";
-        color: #333 !important;
-    }
-    h1:before {
-        counter-increment: h1_cnt;
-        font-weight: normal;
-    }
-    h2:before {
-        counter-increment: h2_cnt;
-        content: counter(h2_cnt);
-        margin-right: 2rem;
-        color: inherit;
-        font-family: var(--h2h3number-export-font);
-        font-weight: bold;
-        vertical-align: 3%;
-    }
-    h3:before {
-        counter-increment: h3_cnt;
-        content: counter(h2_cnt) "." counter(h3_cnt);
-        margin-right: 2rem;
-        color: inherit;
-        font-family: var(--h2h3number-export-font);
-        font-weight: bold;
-    }
-    th {
-        font-family: var(--boldtext-export-font) !important;
-        font-weight: 500 !important;
-    }
-    .md-fences, code {
-        font-family: var(--code-export-font) !important;
-    }
-    strong {
-        font-family: var(--boldtext-export-font) !important;
-        font-weight: 500 !important;
-    }
-
-    /* ================ 范围结束标定 ================ */
-
     
 }
 
