@@ -1,8 +1,23 @@
-1. 根据 Typora 的命名规则, 不允许使用大写字母和 `_` 符号. 而 `-` 符号会被理解为 `white space` .
+- `cuipy.css` 和 `cuipy-latex-style` 请拖入 Typora 的主题文件夹.
 
-2. 关于本文件夹中的文件:
+- `cuipy_css_fonts` 文件夹中的字体文件请全部安装.
 
-	- `github-cuipy.css` 是笔者根据 `github.com` 的主题, 对 Typora 自带的 `github.css` 进行修改得到的.
-	- `github+-cuipy.css` 是笔者对 `github-cuipy.css` 进行修改得到的. (用 `+` 来体现)
-	- `cuipy.css` 是笔者重新做的一套主题, 参考了 Github, 网络博客, 以及 Typora 的自带主题.
+- 为了保证导出的 pdf 和预览时效果接近, 请在 Typora 的设置菜单的相应部分填写:    
+
+	- Margin Top: <u>16</u>mm
+
+	- Margin Bottom: <u>16</u>mm
+
+	- Margin Left: <u>16</u>mm
+
+	- Margin Right: <u>16</u>mm
+
+	- Width x Height: <u>313.7</u>mm x <u>443.6</u>mm
+
+- 笔者在 13 寸 MacBook Pro 的 macOS Catalina 上完成此主题. 
+	当 Typora 窗口充分伸展时, 可保证导出的 pdf 和 Typora 内部编辑时看到的几乎一致. 
+
+- 在 win10 1809 下, 不能保证 pdf 和 Typora 内部编辑时一致, 不过可以手动调整上述 `Width x Height` 参数中的 Width (并保持 Height 同比增加) 达到这种 pdf == 预览 的效果, 但必要性不大. 
+
+
 
