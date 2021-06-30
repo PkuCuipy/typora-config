@@ -39,7 +39,7 @@
     --text-font: "Latin Modern Roman", "Noto Serif CJK SC", Serif; 
     --bold-font: "Noto Sans CJK SC", sans-serif;                                  
     --h2h3number-font: "Latin Modern Roman", "Noto Serif CJK SC", Serif;
-    --h2h3h4text-font: "Noto Sans CJK SC", sans-serif; 
+    --heading-text-font: "Noto Sans CJK SC", sans-serif; 
     
 }
 
@@ -60,14 +60,16 @@ html, body, #write {
     padding-bottom: 100px;
 }
 
+#write {
+    max-width: 1024px;
+}
 /* 当屏幕足够大时, 扩展 max-width 以更好地适应屏幕 */
-#write {max-width: 860px;}
-@media only screen and (min-width: 1400px) {    
+/* @media only screen and (min-width: 1400px) {    
 	#write {max-width: 1024px;}
 }
 @media only screen and (min-width: 1800px) {
 	#write {max-width: 1200px;}
-}
+} */
 
 /******************************* 这里定义水平线的样式 ******************************/
 
@@ -338,17 +340,21 @@ h4::after {
     content: " ]";
     color:var(--theme-blue);
 }
-/* 本主题不支持使用 5、6 级标题 */
-h5, h6 {
+/* 本主题不建议使用 5、6 级标题 */
+h5 {
+    margin-top: 1rem;
     font-size: 1rem;
-    color:red;
-    text-decoration: line-through;
+    color: #777;
 }
-h5:before, 
-h6:before {
-    content: "(请勿使用五级/六级标题!)  ";
-    color: red;
+h6 {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #999;
 }
+
+
+
+
 
 /* 微调, 关于 h2 和 h3 之间的间距 */
 h2 + h3 {
@@ -376,14 +382,20 @@ h1 {
 } 
 h2 {
     counter-reset: h3_cnt;
-    font-family: var(--h2h3h4text-font);
+    font-family: var(--heading-text-font);
     color: #000 !important;
 } 
 h3 {
-    font-family: var(--h2h3h4text-font);
+    font-family: var(--heading-text-font);
 }
 h4 {
-    font-family: var(--h2h3h4text-font);
+    font-family: var(--heading-text-font);
+}
+h5 {
+    font-family: var(--heading-text-font);
+}
+h6 {
+    font-family: var(--heading-text-font);
 }
 h4:before{
     content: "[ ";
@@ -664,6 +676,7 @@ th {
 
 @media print {
     html {
+        font-size: 17px;
         padding: 0 !important;
         margin: 0 4mm !important;
     }
