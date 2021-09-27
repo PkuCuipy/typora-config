@@ -93,18 +93,21 @@ a {
     border-bottom: 1px solid var(--underline-color);
     padding-bottom: 0.5px;
 }
+a[href] {       /* 非 [toc] 的链接要 inherit, 否则在 blockquote 中表现不对 */
+    color: inherit;
+}
 /* 鼠标移动到上面时颜色加深 */
 a:hover {
     color: var(--theme-blue);
     border-bottom: 1px solid var(--theme-blue);
 }
 /* 网页链接 or 文件链接 */
-/* a[href]::after {
+a[href]::after {
     color: #285e8e;
-    vertical-align: 0.5rem;
-    content: " [link]";
-    font-size: 0.5rem;
-} */
+    vertical-align: 0.4rem;
+    content: "?";
+    font-size: 0.7rem;
+}
 
 /******************************* 这里定义[ToC]的样式 *******************************/
 
@@ -407,7 +410,9 @@ blockquote > p + ul {
    备注: 经过深思熟虑(x), 还是决定加上这个特性.
    因为当两个 li 相邻时, 往往我们就认为他们属于同一个 ul.*/
 div#write > ul + ul,
-div#write > ol + ol {
+div#write > ol + ol, 
+blockquote > ul + ul,
+blockquote > ol + ol {
     margin-top: -0.8rem;
 }
 /* 小标题(h4)紧邻列表时, 间距减小 */
@@ -497,18 +502,6 @@ blockquote img:last-child,
 blockquote .md-fences:last-child,
 blockquote blockquote:last-child {
     margin-bottom: 1.111rem !important;
-}
-
-/* 更新 Typora 之后, 
-    内联 LaTeX 公式的大小好像有 bug... */
-.inline-math-svg {              /* 渲染变小, 注意是 em */
-    font-size: 0.9em !important;
-}
-#math-inline-preview-content {  /* 下方预览框变小 */
-    font-size: 0.9rem !important;
-}
-script[type="math/tex"] {       /* 但预览文字不要变小 */
-    font-size: 1rem !important;
 }
 
 
@@ -617,6 +610,20 @@ del {
 }
 .file-library-node.file-tree-node.file-node-root {
     margin-left: -0.6rem;
+}
+
+/* 更新 Typora 之后, 内联 LaTeX 公式的大小好像有 bug... */
+.inline-math-svg {              /* 渲染变小, 注意是 em */
+    font-size: 0.9em !important;
+}
+#math-inline-preview-content {  /* 下方预览框变小 */
+    font-size: 0.9rem !important;
+}
+script[type="math/tex"] {       /* 但预览文字不要变小 */
+    font-size: 1rem !important;
+}
+.md-mathblock-input {
+    font-family: "Noto Sans Mono CJK SC";
 }
 
 
