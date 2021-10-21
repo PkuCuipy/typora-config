@@ -102,12 +102,12 @@ a:hover {
     border-bottom: 1px solid var(--theme-blue);
 }
 /* 网页链接 or 文件链接 */
-a[href]::after {
+/* a[href]::after {
     color: #285e8e;
     vertical-align: 0.4rem;
     content: "?";
     font-size: 0.7rem;
-}
+} */
 
 /******************************* 这里定义[ToC]的样式 *******************************/
 
@@ -212,7 +212,7 @@ h6 tt, h6 code {
 code {                            
     background-color: var(--smallcode-bg-color);    
     color: var(--code-color);
-    padding: 2px 4px 2px 4px;
+    padding: 0.125rem 0.25rem 0.125rem 0.25rem;   /* 2px 4px 2px 4px*/
     margin: 0 2px 0 2px;
     font-family: var(--code-font);
     border-radius: var(--big-border-radius);
@@ -374,7 +374,7 @@ blockquote + h3,
 
 /******************************* 这里定义列表的样式 ******************************/
 
-p, blockquote, ul, ol, dl, table{
+p, blockquote, ul, ol, dl, table {
     margin: 0.8em 0;
 }
 li > ol, li > ul {
@@ -519,7 +519,7 @@ table tr:nth-child(2n), thead {
     background-color: var(--bigcode-bg-color);
 }
 table tr th {
-    font-weight: bold;
+    font-weight: normal;
     border-bottom: 0;
     margin: 0;
     padding: 0.375rem 0.8125rem;
@@ -623,7 +623,7 @@ script[type="math/tex"] {       /* 但预览文字不要变小 */
     font-size: 1rem !important;
 }
 .md-mathblock-input {
-    font-family: "Noto Sans Mono CJK SC";
+    font-family: "Noto Sans Mono CJK SC";   /* menlo 会导致很多符号如 ⇒ 显示得很奇怪 */
 }
 
 
