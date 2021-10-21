@@ -13,6 +13,7 @@
 */
 
 
+
 :root {
 
     /* Typora 定义的 */
@@ -37,7 +38,7 @@
     --small-border-radius: 1px;                   /* 小半径 */
     --code-font: "Latin Modern Mono", "Menlo";  
     --text-font: "Latin Modern Roman", "Noto Serif CJK SC", Serif; 
-    --bold-font: "Noto Sans CJK SC", sans-serif;                                  
+    --bold-font: "Latin Modern Roman", "Noto Sans CJK SC", sans-serif;                                  
     --h2h3number-font: "Latin Modern Roman", "Noto Serif CJK SC", Serif;
     --heading-text-font: "Noto Sans CJK SC", sans-serif; 
     
@@ -211,10 +212,10 @@ h6 tt, h6 code {
 code {                            
     background-color: var(--smallcode-bg-color);    
     color: var(--code-color);
-    padding: 2px 4px 2px 4px;
+    padding: 0.0625rem 0.25rem 0.0625rem 0.25rem;   /* 1px 4px 1px 4px*/
     margin: 0 2px 0 2px;
     font-family: var(--code-font);
-    border-radius: var(--big-border-radius);
+    border-radius: 0.1875rem;
     font-size: 0.9em;
     vertical-align: 3%;
 }
@@ -467,7 +468,9 @@ blockquote > p + ul {
    备注: 经过深思熟虑(x), 还是决定加上这个特性.
    因为当两个 li 相邻时, 往往我们就认为他们属于同一个 ul.*/
 div#write > ul + ul,
-div#write > ol + ol {
+div#write > ol + ol, 
+blockquote > ul + ul,
+blockquote > ol + ol {
     margin-top: -0.8rem;
 }
 /* 小标题(h4)紧邻列表时, 间距减小 */
@@ -571,7 +574,7 @@ table tr:nth-child(2n), thead {
     background-color: var(--bigcode-bg-color);
 }
 table tr th {
-    font-weight: bold;
+    font-weight: normal;
     border-bottom: 0;
     margin: 0;
     padding: 0.375rem 0.8125rem;
@@ -663,11 +666,25 @@ del {
 /* 加粗使用黑体(无衬线) */
 strong {
     font-family: var(--bold-font) !important;
-    font-weight: 500 !important;
+    font-weight: bold !important;
 } 
 th {
     font-family: var(--bold-font) !important;
-    font-weight: 500 !important;
+    font-weight: bold !important;
+}
+
+/* 更新 Typora 之后, 内联 LaTeX 公式的大小好像有 bug... */
+.inline-math-svg {              /* 实际渲染 */
+    font-size: 1.1em !important;
+}
+#math-inline-preview-content {  /* 下方预览框 */
+    font-size: 1rem !important;
+}
+script[type="math/tex"] {       /* 预览文字 */
+    font-size: 1rem !important;
+}
+.md-mathblock-input {
+    font-family: "Noto Sans Mono CJK SC";   /* menlo 会导致很多符号如 ⇒ 显示得很奇怪 */
 }
 
 
