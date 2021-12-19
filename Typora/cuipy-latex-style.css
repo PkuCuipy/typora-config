@@ -668,10 +668,10 @@ strong {
     font-family: var(--bold-font) !important;
     font-weight: bold !important;
 } 
-th {
+/* th {
     font-family: var(--bold-font) !important;
     font-weight: bold !important;
-}
+} */
 
 /* 更新 Typora 之后, 内联 LaTeX 公式的大小好像有 bug... */
 .inline-math-svg {              /* 实际渲染 */
@@ -681,6 +681,10 @@ th {
     font-size: 1rem !important;
 }
 script[type="math/tex"] {       /* 预览文字 */
+    font-size: 0.86rem !important;
+    font-family: "Noto Sans Mono CJK SC";
+}
+.mathjax-block {
     font-size: 1rem !important;
 }
 .md-mathblock-input {
