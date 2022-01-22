@@ -11,7 +11,15 @@
   "keyBinding": {
     "Outline": "Ctrl+Alt+3",
     "Articles": "Ctrl+Alt+2",
-    "File Tree": "Ctrl+Alt+1"
+    "File Tree": "Ctrl+Alt+1",
+    "Insert Table": "Ctrl+Alt+T",
+    "Inline Math": "Ctrl+E",
+    "Quote": "Ctrl+.",
+    "Code Fences": "Ctrl+Alt+C",
+    "Ordered List": "Ctrl+Alt+O",
+    "Unordered List": "Ctrl+Alt+U",
+    "Task List": "Ctrl+Alt+X",
+    "Hyperlink": "Ctrl+Alt+L"
   },
   "monocolorEmoji": false, 
   "maxFetchCountOnFileList": 500,
