@@ -1,0 +1,780 @@
+/*
+    Author: PkuCuipy
+    Date: 2021/2 - 2021/6, still updating...
+    CSS Code Reference: github.css & vintage.css
+    CSS Style Reference: Weitang Li's blog (liwt31.github.io)
+    
+    Margin Top: 16mm
+    Margin Bottom: 16mm
+    Margin Left: 16mm
+    Margin Right: 16mm
+    Width x Height: 313.7mm x 443.6mm (这里是精细调参的结果, 保证预览和导出一致)
+
+*/
+
+
+:root {
+
+    /* Typora 定义的 */
+    --control-text-color: #777;
+    --side-bar-bg-color: #fafafa;
+    --ui-bg-color: #fafafa;
+    
+    /* Cuipy 定义的 */
+    --text-color: #555555;                      /* 文本颜色 */
+    --code-color: rgb(77, 77, 76);              /* 代码颜色 */
+    --theme-blue: rgb(53, 94, 138);             /* 主题蓝色 */
+    --bigcode-bg-color: #f7f7f7;                /* 大代码块背景色 */
+    --smallcode-bg-color: #eeeeee;              /* 小代码块背景色 */
+    --smallcode-text-color: var(--text-color);    /* 小代码块文本色 */
+    --blockquote-bg-color: #dfe2e541;           /* 引用块背景色 */         
+    --blockquote-text-color: #666666;           /* 引用块文本色 */
+    --hr-color: #ddd;                           /* 水平分割线颜色 */     
+    --highlight-color: rgba(163, 85, 163, 0.23);  /* 高亮块颜色 */
+    --underline-color: #cccccc;                   /* 下划线颜色 */
+    --table-border-color: #e7eaed;              /* 表格线颜色 */
+    --big-border-radius: 5px;                     /* 大半径 */
+    --small-border-radius: 1px;                   /* 小半径 */
+    --code-font: "Menlo"; 
+    --text-font: "Noto Sans CJK SC", sans-serif;
+}
+
+
+/******************************* 这里定义一些全局信息 ******************************/
+
+html {
+    font-size: 17px;
+}
+html, body, #write {
+    background: white;
+    font-family: var(--text-font);
+    font-weight: normal;
+    color: var(--text-color);   
+    line-height: 1.6;       /* General line-height. Specified in specific elements */
+    margin: auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+
+
+#write {
+    max-width: 1024px;
+}
+/* 当屏幕足够大时, 扩展 max-width 以更好地适应屏幕 */
+/* @media only screen and (min-width: 1400px) {    
+	#write {max-width: 1024px;}
+}
+@media only screen and (min-width: 1800px) {
+	#write {max-width: 1200px;}
+} */
+
+/******************************* 这里定义水平线的样式 ******************************/
+
+hr {
+    margin: 1.25rem 0;
+    height: 0.125rem;
+    width: 100%;
+    border: none;
+    background-image:                   
+        /* 在这里, [0,0.25rem] 是白色, [0.25rem,0.5rem] 是 hr-color 色 */
+        repeating-linear-gradient(-45deg,
+            #fff 0px,               /* color_i stop-position_i */
+            #fff 0.25rem, 
+            var(--hr-color) 0.25rem,
+            var(--hr-color) 0.5rem);
+}
+
+/******************************* 这里定义链接的样式 *******************************/
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--underline-color);
+    padding-bottom: 0.5px;
+}
+a[href] {       /* 非 [toc] 的链接要 inherit, 否则在 blockquote 中表现不对 */
+    color: inherit;
+}
+/* 鼠标移动到上面时颜色加深 */
+a:hover {
+    color: var(--theme-blue);
+    border-bottom: 1px solid var(--theme-blue);
+}
+/* 网页链接 or 文件链接 */
+/* a[href]::after {
+    color: #285e8e;
+    vertical-align: 0.4rem;
+    content: "?";
+    font-size: 0.7rem;
+} */
+
+/******************************* 这里定义[ToC]的样式 *******************************/
+
+/* 计数器 cnt counter */
+.md-toc-content {
+    counter-reset: h1toc;
+}
+.md-toc-h1 {
+    font-size: 1.1rem;
+    margin-left: 0;
+    counter-reset: h2toc;
+}
+.md-toc-h2 {
+    font-size: 1.05rem;
+    margin-left: 2rem;
+    counter-reset: h3toc;
+}
+.md-toc-h3 {
+    font-size: 1.0rem;
+    margin-left: 3rem;
+    counter-reset: h4toc;
+}
+.md-toc-h4 {
+    font-size: 0.95rem;
+    margin-left: 6rem;
+}
+.md-toc-h1:before {
+    color: #285e8e;
+    white-space: pre-wrap;
+    counter-increment: h1toc;
+    content: "§" counter(h1toc) "  "
+}
+.md-toc-h2:before {
+    color: #285e8e;
+    white-space: pre-wrap;
+    counter-increment: h2toc;
+    content: counter(h1toc) "."counter(h2toc) "  "
+}
+.md-toc-h3:before {
+    color: #285e8e;
+    white-space: pre-wrap;
+    counter-increment: h3toc;
+    content: counter(h1toc) "."counter(h2toc) "."counter(h3toc) "  "
+}
+.md-toc-h4:before {
+    color: #285e8e;
+    white-space: pre-wrap;
+    content: "[ ";
+}
+.md-toc-h4:after {
+    color: #285e8e;
+    white-space: pre-wrap;
+    content: " ]";
+}
+
+.md-toc-h1 .md-toc-inner,
+.md-toc-h2 .md-toc-inner,
+.md-toc-h3 .md-toc-inner,
+.md-toc-h4 .md-toc-inner {
+    margin-left: 0;
+    border-style: none; 
+    font-weight: normal;
+}
+.md-toc-h1 .md-toc-inner:hover,
+.md-toc-h2 .md-toc-inner:hover,
+.md-toc-h3 .md-toc-inner:hover,
+.md-toc-h4 .md-toc-inner:hover,
+.md-toc-h5 .md-toc-inner:hover,
+.md-toc-h6 .md-toc-inner:hover {
+    text-decoration: none;
+} 
+
+
+
+/******************************* 这里定义[任务列表]的样式 ****************************/
+
+.md-task-list-item > input {
+    margin-left: -1.3em;
+    top: 0.25rem !important;
+}
+
+/******************************* 这里定义[代码]的样式 ******************************/
+
+h1 tt, h1 code,
+h2 tt, h2 code,
+h3 tt, h3 code,
+h4 tt, h4 code,
+h5 tt, h5 code,
+h6 tt, h6 code {
+    font-size: 0.9em;   /* in Headings */
+}
+
+/* 调整大代码块, 使其看起来和目标博客类似. 实现起来非常丑陋! */
+.md-fences {
+    background-color: #f0f2f3;
+    color: var(--code-color);
+    font-family: var(--code-font);     
+    margin-bottom: 0.9375rem;
+    margin-top: 0.9375rem;
+    border-radius: var(--small-border-radius);
+}
+code {                            
+    background-color: var(--smallcode-bg-color);    
+    color: var(--code-color);
+    padding: 0.125rem 0.25rem 0.125rem 0.25rem;   /* 2px 4px 2px 4px*/
+    margin: 0 2px 0 2px;
+    font-family: var(--code-font);
+    border-radius: var(--big-border-radius);
+    font-size: 0.9em;
+    vertical-align: 3%;
+}
+.CodeMirror-sizer {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem !important;
+    background-color: var(--bigcode-bg-color);  
+    border-top-right-radius: var(--small-border-radius);
+    border-bottom-right-radius: var(--small-border-radius);
+}
+.CodeMirror-linenumber.CodeMirror-gutter-elt {
+    padding-right: 1px !important;
+    color: #889194 !important;
+}
+.CodeMirror-scroll .CodeMirror.cm-s-inner{
+    background-color: transparent;          /* 默认是继承(inherit)背景色, 但那样会导致边角处越过圆弧线 */
+}
+.CodeMirror-line {
+    padding-left: 0.625rem !important;
+}
+
+/* 取消默认的竖线, 并撑大行号栏 */
+.CodeMirror-gutters {
+    border-right-style: none;   
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+}
+
+/* 语言选择提示框 */
+.code-tooltip {
+    box-shadow: none;
+    border-top: 1px solid #eef2f2;
+}
+
+/* 语法高亮的修改 */
+.cm-tag, 
+.cm-keyword,
+.cm-builtin {
+    color: #8959a8 !important;
+}
+.cm-comment {
+    color: rgb(142, 164, 140) !important;
+}
+.cm-error {
+  color: #c82829 !important;
+}
+.cm-meta {
+  color: #f5871f !important;
+}
+.cm-string, 
+.cm-string-2 {
+  color: #718c00 !important;
+}
+.cm-number {
+  color: #3e999f !important;
+}
+.cm-qualifier, 
+.cm-def,
+.cm-operator,
+.cm-variable-1,
+.cm-variable-2,
+.cm-variable-3,
+.cm-atom {
+  color: #4271ae !important;
+}
+.cm-variable,
+.cm-property {
+    color:var(--code-color) !important;
+}
+
+
+
+/******************************* 这里定义大纲的样式 ******************************/
+
+/* 侧边栏大纲的计数器标号 */
+.sidebar-content {counter-reset: sb_h1_cnt;}
+.outline-h1 {counter-reset: sb_h2_cnt;}
+.outline-h2 {counter-reset: sb_h3_cnt;}
+.outline-h1>.outline-item>.outline-label:before {
+    counter-increment: sb_h1_cnt;
+    content: "§" counter(sb_h1_cnt) ". ";
+}
+.outline-h2>.outline-item>.outline-label:before {
+    counter-increment: sb_h2_cnt;
+    content: counter(sb_h1_cnt) "." counter(sb_h2_cnt) "  "
+}
+.outline-h3>.outline-item>.outline-label:before {
+    counter-increment: sb_h3_cnt;
+    content: counter(sb_h1_cnt) "." counter(sb_h2_cnt) "." counter(sb_h3_cnt) ". ";
+}
+
+
+/******************************* 这里定义标题的样式 ******************************/
+
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 0rem;    
+    font-weight: 500;
+    cursor: text;
+}
+h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    padding-bottom: 0.3rem;  
+}
+h2 {
+    font-size: 1.3rem;
+    color: var(--theme-blue);
+}
+h3 {
+    font-size: 1.1rem;
+}
+h4 {
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+h4:before {
+    content: "[ ";
+    color:var(--theme-blue);
+}
+h4::after {
+    content: " ]";
+    color:var(--theme-blue);
+}
+/* 本主题不建议使用 5、6 级标题 */
+h5 {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #777;
+}
+h6 {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #999;
+}
+
+
+/* 微调, 关于 h2 和 h3 之间的间距 */
+h2 + h3 {
+    margin-top: 1rem;
+}
+
+/* 微调, 关于标题和功能块的间距 */
+blockquote + h2, 
+.md-fences + h2, 
+.mathjax-block + h2 {
+    margin-top: 2rem;
+}
+blockquote + h3, 
+.md-fences + h3, 
+.mathjax-block + h3 {
+    margin-top: 2rem;
+}
+
+
+/******************************* 这里定义列表的样式 ******************************/
+
+p, blockquote, ul, ol, dl, table {
+    margin: 0.8em 0;
+}
+li > ol, li > ul {
+    margin: 0 0;
+}
+li p.first {
+    display: inline-block;
+}
+ul {
+    padding-left: 1.25rem;         
+}
+ol {
+    padding-left: 1.4375rem;
+}
+ul:first-child, ol:first-child {
+    margin-top: 0;
+}
+ul:last-child, ol:last-child {
+    margin-bottom: 0;
+}
+/* 列表中的段落不设置边界了, 因为间距太大太丑. */
+li > p {
+    margin: 0 0;
+}
+/* 文本紧邻列表时, 间距减小 */
+div#write > p + ol, 
+div#write > p + ul,
+blockquote > p + ol, 
+blockquote > p + ul {
+    margin-top: -0.4rem;
+}
+/* 同类列表的 li 紧邻时, margin "取消".
+   备注: 经过深思熟虑(x), 还是决定加上这个特性.
+   因为当两个 li 相邻时, 往往我们就认为他们属于同一个 ul.*/
+div#write > ul + ul,
+div#write > ol + ol, 
+blockquote > ul + ul,
+blockquote > ol + ol {
+    margin-top: -0.8rem;
+}
+/* 小标题(h4)紧邻列表时, 间距减小 */
+h4 + ol, h4 + ul {
+    margin-top: 0.5rem;
+}
+
+/******************************* 这里定义段落的样式 ******************************/
+
+/* 折行和软换行的行间距增大 */
+p {
+    line-height: 2.0;
+}
+/* 对于导出的 html 或 pdf 而言, 某些位置的 p 被优化掉了, 取而代之的是 span */
+span {
+    line-height: 2.0;
+}
+/* 但这两个位置不要被改成 2.0! */
+table span,
+.md-fences span {
+    line-height: 1.6;
+}
+/* 小标题(h4)紧邻段落时, 间距减小 */
+h4 + p {
+    margin-top: 0.4rem;
+}
+
+
+/******************************* 这里定义图片的样式 ******************************/
+
+img {
+    border-radius: var(--small-border-radius);
+    box-shadow: 0 0px 5px rgba(0,0,0,0.1);
+    padding: 0 0 0 0;
+    margin: 0 auto;
+    display: block;
+}
+span[md-inline="imgtag"] {  /* 有的时候图片会左对齐, 没仔细研究原因, 先打个补丁 */
+    display: block;
+    text-align: center;     /* 表面上是设置文字对齐原则, 实际上是对任何不能充满 box 的元素的对齐原则 */
+}
+
+/* 紧接着图片的文字被视为图片注释 */
+span[md-inline="image"] + span[md-inline="plain"],      /* 没有设置图片缩放时, Typora 赋予图片对象的标识 */
+span[md-inline="imgtag"] + span[md-inline="plain"] {    /* 在设置了图片缩放后, Typora 赋予图片对象的标识 */
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 0.15rem;
+    margin-bottom: 0.3rem;
+}
+img + span {                                            /* 导出为 html / pdf 时 */
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 0.15rem;
+    margin-bottom: 0.3rem;
+}
+
+
+
+
+/******************************* 这里定义引用块的样式 ******************************/
+
+blockquote {
+    border-left: 0.42rem solid #ddd;
+    padding: 0.125rem 0.625rem 0.1875rem 0.875rem;  
+    background-color: var(--blockquote-bg-color);
+    color: var(--blockquote-text-color);  
+    border-top-right-radius: var(--big-border-radius);  
+    border-bottom-right-radius: var(--big-border-radius);  
+    margin-left: 1px;
+}
+/* 多嵌套时, 右侧不再继续缩小 */
+blockquote blockquote {   
+    padding-right: 0;                               
+}
+/* blockquote 紧邻文本时, 相应边界减小 */
+p + blockquote {                                    
+    margin-top: 0.25rem;
+}
+/* 引用块内的最后一个大公式块/图片/代码块/引用块的下边距增大 */
+blockquote .mathjax-block:last-child, 
+blockquote img:last-child,
+blockquote .md-fences:last-child,
+blockquote blockquote:last-child {
+    margin-bottom: 1.111rem !important;
+}
+
+
+/******************************* 这里定义表格的样式 ******************************/
+
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n), thead {
+    background-color: var(--bigcode-bg-color);
+}
+table tr th {
+    font-weight: normal;
+    border-bottom: 0;
+    margin: 0;
+    padding: 0.375rem 0.8125rem;
+}
+table tr td {
+    margin: 0;
+    padding: 0.375rem 0.8125rem;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+/* 王字型边框线 */
+table {
+    border-top: 1px solid var(--table-border-color);
+    border-bottom: 1px solid var(--table-border-color);
+}
+th:first-child ~ th,
+td:first-child ~ td {
+    border-left: solid 1px var(--table-border-color);
+}
+/* th {
+    border-bottom: solid 1px var(--table-border-color) !important;
+} */
+
+
+/*************************** 这里修改一些杂项的样式 **************************/
+
+/* 修改高亮的颜色, 以及柔和的边框, 类似小代码块<code> */
+mark {
+    color: var(--text-color);
+    background-color: var(--highlight-color);
+    border-radius: var(--big-border-radius); 
+    padding-top: 0px;
+    padding-right: 0.125rem;
+    margin-right: -0.125rem;
+}
+span + span > mark {
+    padding-left: 0.125rem;
+    margin-left: -0.125rem;
+}
+/* 修改下划线的实现方式(默认下划线->下边框) 提供更多定制空间 */
+u {
+    text-decoration: none;
+    border-bottom: 1px solid var(--underline-color);
+    padding-bottom: 0.03125rem;
+}
+/* <斜体>修改右侧对齐量, 防止最右侧的斜体字"插进"正体字里 */
+em {
+    margin-right: 2px;
+}
+/* 删除线的微调 */
+del {
+    text-decoration-color: var(--text-color);
+    text-decoration-thickness: 0.09rem;
+    color: var(--blockquote-text-color);
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+
+/* 内联公式有点偏下 */
+/* .inline-math-svg {
+    vertical-align: 3%;
+} */
+/* emoji 有点偏下 */
+.md-emoji-span {
+    vertical-align: 7%;
+}
+
+/* 侧边栏字号也根据 html 字号变化 */
+#typora-sidebar {
+    font-size: 0.89rem !important;
+}
+
+/* 侧边栏行高有点高 */
+#typora-sidebar span {
+    line-height: 1.5;
+}
+
+/* 侧边栏表示层次结构的偏移量 */
+.file-library-node.file-tree-node {
+    margin-left: 0.4rem;
+}
+.file-library-node.file-tree-node.file-node-root {
+    margin-left: -0.6rem;
+}
+
+/* 更新 Typora 之后, 内联 LaTeX 公式的大小好像有 bug... */
+.inline-math-svg {              /* 渲染变小, 注意是 em */
+    font-size: 0.9em !important;
+}
+#math-inline-preview-content {  /* 下方预览框变小 */
+    font-size: 0.9rem !important;
+}
+script[type="math/tex"] {       /* 但预览文字不要变小 */
+    font-size: 1rem !important;
+}
+.md-mathblock-input {
+    font-family: "Noto Sans Mono CJK SC";   /* menlo 会导致很多符号如 ⇒ 显示得很奇怪 */
+}
+
+
+/*************************** 这里定义打印或者导出PDF的样式 **************************/
+
+
+/*  导出pdf的页边距, 然而 Safari 不支持 @page, 
+    不过最新版本的 Typora 的 Preference 里可以设置页边距了! 
+    具体地, 在 Typora 的偏好设置中:
+    - Margin Top:       16mm
+    - Margin Bottom:    16mm
+    - Margin Left:      16mm
+    - Margin Right:     16mm
+    - Width x Height:   311.2mm x 440.1mm   
+*/
+
+@media print {
+    html {
+        font-size: 17px;
+        padding: 0 !important;
+        margin: 0 4mm !important;
+    }
+    html, body, #write {
+        max-width: 999999999px !important;                 /* 导出时, 尽可能宽都无所谓 */
+    }
+    #write {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    table, pre {
+        page-break-inside: auto !important;   
+    }
+    pre {
+        word-wrap: break-word !important;
+    }
+    
+}
+
+
+
+/*************************** 下面的是从 github.css 直接复制过来的, 不太清楚具体做了什么 **************************/
+
+
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: var(--big-border-radius); 
+    color: #777777;
+    color: red;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+.md-mathjax-midline {
+    background-color: var(--ui-bg-color); 
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    border: 1px solid #ddd;                           
+    border-radius: var(--big-border-radius);      
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: var(--ui-bg-color); 
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: var(--ui-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: var(--ui-bg-color);  
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
