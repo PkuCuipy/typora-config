@@ -1,4 +1,4 @@
-**Themes.**
+My Configurations for Typora.app
 
-
-2022-02-08: 考虑将这个 Repo 改为 My-Typora-Config 这种
+- CSS Theme (for all platforms)
+- Keymaps (for Windows)
