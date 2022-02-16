@@ -674,7 +674,7 @@ strong {
 } */
 
 /* 更新 Typora 之后, 内联 LaTeX 公式的大小好像有 bug... */
-.inline-math-svg {              /* 实际渲染 */
+.md-inline-math {              /* 实际渲染 */
     font-size: 1.1em !important;
 }
 #math-inline-preview-content {  /* 下方预览框 */
