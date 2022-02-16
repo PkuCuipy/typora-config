@@ -613,13 +613,17 @@ del {
 }
 
 /* 更新 Typora 之后, 内联 LaTeX 公式的大小好像有 bug... */
-.inline-math-svg {              /* 渲染变小, 注意是 em */
+.md-inline-math {              /* 渲染变小, 注意是 em */
     font-size: 0.9em !important;
 }
 #math-inline-preview-content {  /* 下方预览框变小 */
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
 }
 script[type="math/tex"] {       /* 但预览文字不要变小 */
+    font-size: 0.86rem !important;
+    font-family: "Noto Sans Mono CJK SC";
+}
+.mathjax-block {
     font-size: 1rem !important;
 }
 .md-mathblock-input {
