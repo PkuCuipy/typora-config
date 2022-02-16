@@ -1,0 +1,29 @@
+{
+  "defaultFontFamily": {
+    "standard": null,
+    "sansSerif": null, 
+    "monospace": null 
+  },
+  "autoHideMenuBar": false, 
+  "searchService": [
+    ["Search with Google", "https://google.com/search?q=%s"]
+  ],
+  "keyBinding": {
+    "File Tree": "Ctrl+Alt+1",      // 侧边栏 1
+    "Articles": "Ctrl+Alt+2",       // 侧边栏 2
+    "Outline": "Ctrl+Alt+3",        // 侧边栏 3
+    "Code": "Ctrl+m",               // 行内代码 (m: monospaced)
+    "Code Fences": "Ctrl+Alt+C",    // 代码块
+    "Inline Math": "Ctrl+E",        // 行内 LaTeX 
+    "Math Block": "Ctrl+Alt+E",     // LaTeX 公式块
+    "Insert Table": "Ctrl+Alt+T",   // 表格
+    "Ordered List": "Ctrl+Alt+O",   // 有序列表
+    "Unordered List": "Ctrl+Alt+U", // 无序列表
+    "Task List": "Ctrl+Alt+X",      // 任务列表
+    "Quote": "Ctrl+Alt+.",          // 引用块
+    "Hyperlink": "Ctrl+K"           // 超链接
+  },
+  "monocolorEmoji": false, 
+  "maxFetchCountOnFileList": 500,
+  "flags": [] 
+}
