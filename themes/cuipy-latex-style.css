@@ -544,12 +544,12 @@ blockquote {
     margin-left: 1px;
 }
 /* > > > 的嵌套时, 内层 blockquote 的行为 */
-blockquote blockquote:first-child {   
-    padding-right: 0;
-    background-color: transparent;
-    margin-top: -0.125rem;
-    margin-bottom: -0.1875rem;
-    border-left-color: #e8e8e8;
+blockquote blockquote {   
+    padding-right: 0 !important;
+    background-color: transparent !important;
+    margin-top: -0.125rem !important;
+    margin-bottom: -0.1875rem !important;
+    border-left-color: #e8e8e8 !important;
 }
 /* blockquote 紧邻文本时, 相应边界减小 */
 p + blockquote {                                    
