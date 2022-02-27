@@ -488,9 +488,13 @@ blockquote {
     border-bottom-right-radius: var(--big-border-radius);  
     margin-left: 1px;
 }
-/* 多嵌套时, 右侧不再继续缩小 */
-blockquote blockquote {   
-    padding-right: 0;                               
+/* > > > 的嵌套时, 内层 blockquote 的行为 */
+blockquote blockquote:first-child {   
+    padding-right: 0;
+    background-color: transparent;
+    margin-top: -0.125rem;
+    margin-bottom: -0.1875rem;
+    border-left-color: #e8e8e8;
 }
 /* blockquote 紧邻文本时, 相应边界减小 */
 p + blockquote {                                    
@@ -499,8 +503,9 @@ p + blockquote {
 /* 引用块内的最后一个大公式块/图片/代码块/引用块的下边距增大 */
 blockquote .mathjax-block:last-child, 
 blockquote img:last-child,
-blockquote .md-fences:last-child,
-blockquote blockquote:last-child {
+blockquote .md-fences:last-child
+/* blockquote blockquote:last-child  */
+{
     margin-bottom: 1.111rem !important;
 }
 
