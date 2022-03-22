@@ -30,7 +30,7 @@
 
 ### 注意事项
 - 笔者仅在自己的设备上调试了参数, 即一台 13 英寸 MacBook 以及一台 Win11 台式机.
-- 特别地, 如果您发现 pdf 和 Typora 预览效果不一致, 可通过调整 Width x Height 参数中的 Width (并保持 Height 同比增加) 达到这种 pdf == 预览 的效果.
+- 特别地, 如果您发现 pdf 和 Typora 预览效果不一致, 可通过调整 Width x Height 参数中的 `Width` (并保持 `Height` 同比增加) 达到这种 pdf ≈ 预览 的效果.
 
 ### Notice
 - I test these parameters only on my own devices, which are a 13-inch MacBook and a Win11 PC. 
