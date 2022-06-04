@@ -1,12 +1,6 @@
-## My Configurations for Typora.app
-
 ### 包含
-- CSS 主题 (全平台通用)
-- 键位映射 (仅限 Windows)
-
-### Including
-- CSS Theme (for all platforms)
-- Keymaps (for Windows)
+- CSS 主题 (macOS + Windows)
+- 键位映射 (仅 Windows)
 
 ### 使用方法
 1. 请先安装所有相关字体
@@ -16,7 +10,17 @@
     - Margin Left: 16mm
     - Margin Right: 16mm
     - Width x Height: 313.7mm x 443.6mm
-    - 字体大小: 自动 (即请不要手动指定)
+    - 字体大小: 自动 (即: 请不要手动指定)
+
+### 注意事项
+- 经过笔者的有限测试, 其在 macOS 12 (Safari) 和 Windows 11 (Chromium) 下均运作正常.
+- 如果发现 pdf 和 Typora 预览效果不一致, 请尝试调整 Width x Height 参数中的 `Width` (并保持 `Height` 同比增加) 达到 PDF ≈ 预览 的效果.
+
+---
+
+### About
+- CSS Theme (macOS + Windows)
+- Keymaps (Windows only)
 
 ### Usage
 1. Install all fonts in fonts folder first.
@@ -26,12 +30,9 @@
     - Margin Left: 16mm
     - Margin Right: 16mm
     - Width x Height: 313.7mm x 443.6mm
-    - font size: auto (i.e. do not manually specify it)
+    - font size: auto (i.e. do not manually specify)
 
-### 注意事项
-- 笔者仅在自己的设备上调试了参数, 即一台 13 英寸 MacBook 以及一台 Win11 台式机.
-- 特别地, 如果您发现 pdf 和 Typora 预览效果不一致, 可通过调整 Width x Height 参数中的 `Width` (并保持 `Height` 同比增加) 达到这种 pdf ≈ 预览 的效果.
 
 ### Notice
-- I test these parameters only on my own devices, which are a 13-inch MacBook and a Win11 PC. 
-- Specifically, if the exported PDF is not the same as the preview in Typora, try adjusting the `Width` parameter (and scale `Height` in proportion) to fix it yourself.
+- After limited testing, I find it works well on both macOS 12 (with Safari core) and Windows 11 (with Chromium).
+- If the exported PDF is quite different from what you see in Typora, you can try adjusting the `Width` parameter (and scale `Height` in proportion) to tune it.
