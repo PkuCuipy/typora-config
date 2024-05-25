@@ -4,4 +4,4 @@
 - lmroman10
 - Menlo
 
-> Can't update original font files due to Github's not allowing uploading large files (>25MB).
+> Font files are not uploaded due to GitHub's restriction on file size < 25MB.

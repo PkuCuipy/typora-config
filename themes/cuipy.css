@@ -36,7 +36,7 @@
     --big-border-radius: 5px;                     /* 大半径 */
     --small-border-radius: 1px;                   /* 小半径 */
     --code-font: "Menlo"; 
-    --text-font: "Noto Sans CJK SC", sans-serif;
+    --text-font: "Noto Sans", "Noto Sans CJK SC", sans-serif;
 }
 
 
@@ -180,7 +180,13 @@ a:hover {
     text-decoration: none;
 } 
 
-
+/* 缩小了 [toc] 块下方的大间距留白 */
+.md-toc {
+    padding-bottom: 0.3rem !important;
+}
+.md-toc-content {
+    margin-bottom: 0 !important;
+}
 
 /******************************* 这里定义[任务列表]的样式 ****************************/
 
